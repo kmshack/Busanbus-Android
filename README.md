@@ -12,7 +12,7 @@ Busanbus for Android
 
 
 라이센스
-====
+-----
 
 - 별도로 언급 된 경우를 제외, 부산버스앱은 아파치 라이센스버 2.0버전(http://www.apache.org/licenses/LICENSE-2.0.html)을 기본으로 합니다.
 - 누구나 사용뿐만아니라 수정 및 재배포, 2차적인 저작물도 개발 가능합니다. 
@@ -21,7 +21,7 @@ Busanbus for Android
 
 
 데이터 정보
-====
+-----
 
 - 정류소 데이터 http://121.174.75.12/02/021.html_ok.asp?m=2&m1=2&bstopnm=
 - 실시간 도착 데이터 http://121.174.75.12/01/011.html.asp?m=1&m1=1&bstop_id=172690101&linenm=186&line_id=5200186000
@@ -31,7 +31,7 @@ Busanbus for Android
 
 
 주의점 및 참고사항
-====
+-----
 
 - 구글 지도는 프로젝트내 string.xml의 google_api_key를 별도로 발급받으셔야 지도가 사용 가능합니다.
 - 버스와 노선 관련 데이터파일과 수집 방법에 대한 방법은 database를 참고 하시면 됩니다.
