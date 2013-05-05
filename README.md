@@ -1,8 +1,5 @@
-busanbus
+Busanbus for Android
 ========
-
-BusanBus For Android
-
 
 부산버스 안드로이드 앱을 모든 코드를 공개하여 오픈소스화 합니다. 
 
@@ -32,4 +29,11 @@ BusanBus For Android
 - 버스와 노선 관련 데이터파일과 수집 방법에 대한 방법은 database를 참고 하시면 됩니다.
 - database/BusData.kms 데이터파일은 sqlite파일이며 2012년 12월을 최신으로 작성된 데이터입니다. 데이터수집 및 작성방법은 database/busanbus_data.xlsx을 확인바랍니다.
 - 데이터파일은 앱내에 저장되어 있으며 안드로이드 특성상 데이터를 분할 하여 앱 실행시 다시 합치는 방식으로 앱 분할 방법은 database/datacut 프로젝트를 참고하시기 바랍니다.
+
+
+
+
+추가 문의사항은 이슈게시판 또는 개발자 블로그(http://www.kmshack.kr)에 글을 남겨 주기시 바랍니다.
+
+
 
