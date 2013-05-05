@@ -4,9 +4,7 @@ Busanbus for Android
 
 부산버스 안드로이드 앱 (http://play.google.com/store/apps/details?id=com.kmshack.BusanBus) 오픈소스화 합니다. 
 
-![busanbus screens](screens.png)
-
-
+<br/>
 
 부산버스 안드로이드 앱의 코드를 공개한 이유는 몇십만 시민이 쓰는 앱을 한사람의 개인개발자가 운영 또는 기능에 대한 의사결한정을 하기에 힘들다고 판단 하였습니다.
 또한 코드오픈을 통해 좀더 많은 개발자들이 협력 한다면 더 좋을 앱이 나오지 않을까라는 생각하게 되었습니다.
@@ -14,6 +12,9 @@ Busanbus for Android
 <br/>
 오픈 소스화는 더 이상 업데이트하지 않겠다는 의미가 아니라 개발자들 또는 사용자분들과 협력하여 더 나은 앱으로 만들어가겠다는 의지임을 알아 주셨으면 좋겠습니다.
 
+<br/>
+
+![busanbus screens](screens.png)
 
 <br/>
 라이센스
