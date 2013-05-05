@@ -1,6 +1,7 @@
 Busanbus for Android
 ========
 
+
 부산버스 안드로이드 앱을 모든 코드를 공개하여 오픈소스화 합니다. 
 
 
@@ -9,9 +10,11 @@ Busanbus for Android
 
 
 
+
 라이센스
 - 별도로 언급 된 경우를 제외, 부산버스앱은 아파치 라이센스버 2.0버전(http://www.apache.org/licenses/LICENSE-2.0.html)을 기본으로 합니다.
 - 누구나 사용뿐만아니라 수정 및 재배포, 2차적인 저작물도 개발 가능합니다. 
+
 
 
 
@@ -23,12 +26,14 @@ Busanbus for Android
 
 
 
+
 주의점 및 참고사항
 
 - 구글 지도는 프로젝트내 string.xml의 google_api_key를 별도로 발급받으셔야 지도가 사용 가능합니다.
 - 버스와 노선 관련 데이터파일과 수집 방법에 대한 방법은 database를 참고 하시면 됩니다.
 - database/BusData.kms 데이터파일은 sqlite파일이며 2012년 12월을 최신으로 작성된 데이터입니다. 데이터수집 및 작성방법은 database/busanbus_data.xlsx을 확인바랍니다.
 - 데이터파일은 앱내에 저장되어 있으며 안드로이드 특성상 데이터를 분할 하여 앱 실행시 다시 합치는 방식으로 앱 분할 방법은 database/datacut 프로젝트를 참고하시기 바랍니다.
+
 
 
 
