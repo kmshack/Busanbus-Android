@@ -3,7 +3,7 @@ Busanbus for Android
 
 <br/>
 
-부산버스 안드로이드 앱 (http://play.google.com/store/apps/details?id=com.kmshack.BusanBus) 오픈소스화 합니다. 
+부산버스 안드로이드 앱 ( http://play.google.com/store/apps/details?id=com.kmshack.BusanBus ) 오픈소스화 합니다. 
 
 <br/>
 
@@ -21,7 +21,7 @@ Busanbus for Android
 라이센스
 -----
 
-- 별도로 언급 된 경우를 제외, 부산버스앱은 아파치 라이센스버 2.0버전(http://www.apache.org/licenses/LICENSE-2.0.html)을 기본으로 합니다.
+- 별도로 언급 된 경우를 제외, 부산버스앱은 아파치 라이센스버 2.0버전( http://www.apache.org/licenses/LICENSE-2.0.html )을 기본으로 합니다.
 
 - 누구나 사용뿐만아니라 수정 및 재배포, 2차적인 저작물도 개발 가능합니다. 
 
@@ -54,7 +54,7 @@ Busanbus for Android
 
 <br/><br/><br/>
 
-추가 문의사항은 이슈게시판 또는 개발자 블로그(http://www.kmshack.kr)에 글을 남겨 주기시 바랍니다.
+추가 문의사항은 이슈게시판 또는 개발자 블로그( http://www.kmshack.kr )에 글을 남겨 주기시 바랍니다.
 
 
 
