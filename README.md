@@ -4,7 +4,7 @@ Busanbus for Android
 
 부산버스 안드로이드 앱(https://play.google.com/store/apps/details?id=com.kmshack.BusanBus)을 모든 코드를 공개하여 오픈소스화 합니다. 
 
-![kmshack logo](/kmshack/busanbus-android/master/screens.png)
+![busanbus screens](screens.png)
 
 
 
