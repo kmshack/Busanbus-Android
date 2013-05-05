@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:layout_gravity="center_vertical"
+	android:gravity="center_vertical"
+	android:orientation="vertical" >
+
+	<ListView
+		android:id="@+id/lv_favorite"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_weight="1"
+		android:cacheColorHint="@android:color/transparent"
+		android:fastScrollEnabled="true"
+		android:footerDividersEnabled="true"
+		android:headerDividersEnabled="false"
+		android:listSelector="@drawable/list_selector" />
+
+	<TextView
+		android:id="@+id/favorite_empty"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_weight="1"
+		android:gravity="center"
+		android:padding="35dip"
+		android:text="즐겨찾기된 노선/정류소가 없습니다. \n\n노선 및 정류소 검색 후 실시간도착 정보 하단에서 즐겨찾기를 하실 수 있습니다." />
+
+	<ImageView
+		android:layout_width="fill_parent"
+		android:layout_height="1px"
+		android:background="#D2D2C8" />
+
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="46dip"
+		android:background="#F7F7F0"
+		android:gravity="center_vertical"
+		android:orientation="horizontal"
+		android:padding="6dip" >
+
+		<TextView
+			android:id="@+id/favorite_tab_nosun"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:layout_weight="1"
+			android:gravity="center"
+			android:text="노선" />
+
+		<TextView
+			android:id="@+id/favorite_tab_busstop"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:layout_weight="1"
+			android:gravity="center"
+			android:text="정류소" />
+	</LinearLayout>
+
+</LinearLayout>

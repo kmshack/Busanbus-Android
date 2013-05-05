@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BusanBus</string>
+
+    <string name="profile">Developers: Minsoo, Kim\nEmail: kmshack@naver.com\nFacebook: http://fb.com/kmshack</string>
+    <string name="ver_info">Platform: Android 2.1~ \nApp Version: 2.1.1\nData Version: 20121204\nLast Update: 2012. 12. 04</string>
+    <string name="loading_msg">Data Updating..</string>
+    
+    <string name="google_map_api_key">05wia_LbZgqr9JvTmqu-10bcXcg6F-MQzfTnpYA</string>
+    
+</resources>

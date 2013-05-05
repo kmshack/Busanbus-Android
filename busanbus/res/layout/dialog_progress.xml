@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:gravity="center"
+	android:orientation="vertical" >
+
+	<ProgressBar
+		style="@style/loading"
+		android:layout_width="76dip"
+		android:layout_height="76dip"
+		android:background="@drawable/dialog_full_holo_light"
+		android:padding="20dip" />
+
+</LinearLayout>

@@ -1,0 +1,9 @@
+<selector android:id="@+id/list_selector" xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- Non pressed states -->
+	<item android:state_selected="false" android:state_pressed="false" android:drawable="@drawable/list_normal" />
+	<item android:state_selected="true" android:state_pressed="false"  android:drawable="@drawable/list_pressed" />
+
+	<!-- Pressed -->
+	<item android:state_pressed="true" android:drawable="@drawable/list_pressed" />
+	
+</selector>

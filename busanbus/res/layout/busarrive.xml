@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical" >
+
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_weight="1"
+		android:orientation="vertical" >
+
+		<ScrollView
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:orientation="vertical"
+			android:scrollbarStyle="outsideOverlay" >
+
+			<LinearLayout
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:orientation="vertical" >
+
+				<ImageView
+					android:layout_width="fill_parent"
+					android:layout_height="1px"
+					android:background="#D2D2C8" />
+
+				<TextView
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="10dip"
+					android:layout_marginRight="10dip"
+					android:layout_marginTop="3dip"
+					android:padding="5dip"
+					android:text="위치 정보"
+					android:textSize="15sp"
+					android:textStyle="bold" />
+
+				<com.google.android.maps.MapView
+					xmlns:android="http://schemas.android.com/apk/res/android"
+					android:id="@+id/mapview"
+					android:layout_width="fill_parent"
+					android:layout_height="150dip"
+					android:layout_marginBottom="10dip"
+					android:layout_marginLeft="12dip"
+					android:layout_marginRight="12dip"
+					android:apiKey="@string/google_map_api_key"
+					android:clickable="true" />
+
+				<ImageView
+					android:layout_width="fill_parent"
+					android:layout_height="1px"
+					android:background="#D2D2C8" />
+
+				<com.kmshack.BusanBus.view.SizeableTextView
+					android:id="@+id/busarrive_text3"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:padding="10dip"
+					android:text="1번째 차량 도착예정정보"
+					android:textSize="15sp"
+					android:textStyle="bold" />
+
+				<com.kmshack.BusanBus.view.SizeableTextView
+					android:id="@+id/busarrive_text4"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="10dip"
+					android:layout_marginLeft="12dip"
+					android:text="도착정보 없음."
+					android:textColor="#EE3333"
+					android:textSize="13sp" />
+
+				<ImageView
+					android:layout_width="fill_parent"
+					android:layout_height="1px"
+					android:background="#D2D2C8" />
+
+				<com.kmshack.BusanBus.view.SizeableTextView
+					android:id="@+id/busarrive_text5"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:padding="10dip"
+					android:text="2번째 차량 도착예정정보"
+					android:textSize="15sp"
+					android:textStyle="bold" />
+
+				<com.kmshack.BusanBus.view.SizeableTextView
+					android:id="@+id/busarrive_text6"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="10dip"
+					android:layout_marginLeft="12dip"
+					android:text="도착정보 없음."
+					android:textColor="#EE3333"
+					android:textSize="13sp" />
+
+				<ImageView
+					android:layout_width="fill_parent"
+					android:layout_height="1px"
+					android:background="#D2D2C8" />
+
+				<TextView
+					android:id="@+id/busarrive_bt2"
+					android:layout_width="fill_parent"
+					android:layout_height="48dip"
+					android:layout_gravity="center_vertical"
+					android:background="@drawable/list_selector"
+					android:gravity="center_vertical"
+					android:padding="10dip"
+					android:text="새로고침"
+					android:textColor="#777777"
+					android:textSize="17sp"
+					android:textStyle="bold" />
+
+				<ImageView
+					android:layout_width="fill_parent"
+					android:layout_height="1px"
+					android:background="#D2D2C8" />
+
+				<TextView
+					android:id="@+id/busarrive_bt1"
+					android:layout_width="fill_parent"
+					android:layout_height="48dip"
+					android:layout_gravity="center_vertical"
+					android:background="@drawable/list_selector"
+					android:gravity="center_vertical"
+					android:padding="10dip"
+					android:text="즐겨찾기 추가"
+					android:textColor="#888888"
+					android:textSize="16sp"
+					android:textStyle="bold" />
+
+				<ImageView
+					android:layout_width="fill_parent"
+					android:layout_height="1px"
+					android:background="#D2D2C8" />
+
+				<TextView
+					android:id="@+id/busarrive_bt0"
+					android:layout_width="fill_parent"
+					android:layout_height="48dip"
+					android:layout_gravity="center_vertical"
+					android:background="@drawable/list_selector"
+					android:gravity="center_vertical"
+					android:padding="10dip"
+					android:text="바로가기 만들기"
+					android:textColor="#888888"
+					android:textSize="16sp"
+					android:textStyle="bold" />
+
+				<ImageView
+					android:layout_width="fill_parent"
+					android:layout_height="1px"
+					android:background="#D2D2C8" />
+
+				<TextView
+					android:id="@+id/busstopdetail_locationbt"
+					android:layout_width="fill_parent"
+					android:layout_height="48dip"
+					android:layout_gravity="center_vertical"
+					android:background="@drawable/list_selector"
+					android:gravity="center_vertical"
+					android:padding="10dip"
+					android:text="정류소 위치 확인"
+					android:textColor="#888888"
+					android:textSize="16sp"
+					android:textStyle="bold" />
+
+				<ImageView
+					android:layout_width="fill_parent"
+					android:layout_height="1px"
+					android:background="#D2D2C8" />
+
+				<TextView
+					android:id="@+id/busarrive_bt3"
+					android:layout_width="fill_parent"
+					android:layout_height="48dip"
+					android:layout_gravity="center_vertical"
+					android:background="@drawable/list_selector"
+					android:gravity="center_vertical"
+					android:padding="10dip"
+					android:text="카카오톡으로 공유"
+					android:textColor="#888888"
+					android:textSize="16sp"
+					android:textStyle="bold" />
+
+				<ImageView
+					android:layout_width="fill_parent"
+					android:layout_height="1px"
+					android:background="#D2D2C8" />
+			</LinearLayout>
+		</ScrollView>
+	</LinearLayout>
+
+</LinearLayout>

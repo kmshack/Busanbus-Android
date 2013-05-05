@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical" >
+
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		android:orientation="vertical" >
+
+		<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dip"
+			android:layout_marginRight="10dip"
+			android:layout_marginTop="3dip"
+			android:padding="5dip" >
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:text="위치 정보"
+				android:textSize="15sp"
+				android:textStyle="bold" />
+
+			<TextView
+				android:id="@+id/busarrive_show_map"
+				android:layout_width="wrap_content"
+				android:layout_height="fill_parent"
+				android:layout_gravity="bottom"
+				android:text="▼ 지도 표시"
+				android:textColor="#EF6000"
+				android:textSize="15sp"
+				android:textStyle="bold" />
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="15dip"
+			android:layout_marginRight="15dip"
+			android:layout_marginTop="2dip"
+			android:orientation="vertical" >
+
+			<com.kmshack.BusanBus.view.SizeableTextView
+				android:id="@+id/busstopdetail_nosuntext"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:textSize="13sp" />
+
+			<com.google.android.maps.MapView
+				android:id="@+id/mapview"
+				android:layout_width="fill_parent"
+				android:layout_height="150dip"
+				android:layout_marginLeft="2dip"
+				android:layout_marginRight="2dip"
+				android:layout_marginTop="5dip"
+				android:apiKey="@string/google_map_api_key"
+				android:clickable="true"
+				android:visibility="gone" />
+		</LinearLayout>
+
+		<ImageView
+			android:layout_width="fill_parent"
+			android:layout_height="1px"
+			android:layout_marginTop="10dip"
+			android:background="#D2D2C8" />
+	</LinearLayout>
+
+	<RelativeLayout
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_weight="1" >
+
+		<ListView
+			android:id="@+id/busstopdetail_nosunlist"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:cacheColorHint="@android:color/transparent"
+			android:fastScrollEnabled="true"
+			android:footerDividersEnabled="false"
+			android:headerDividersEnabled="false"
+			android:listSelector="@drawable/list_selector" />
+
+		<ImageView
+			android:id="@+id/busstopdetail_reflash_top"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			android:layout_alignParentRight="true"
+			android:layout_marginBottom="40dip"
+			android:layout_marginRight="10dip"
+			android:background="@drawable/dialog_full_holo_light"
+			android:src="@drawable/ic_menu_refresh" />
+	</RelativeLayout>
+
+</LinearLayout>

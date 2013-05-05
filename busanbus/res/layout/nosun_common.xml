@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:layout_gravity="center_vertical|top"
+	android:gravity="center_vertical|top"
+	android:orientation="vertical" >
+
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="42dip" >
+
+		<LinearLayout
+			android:id="@+id/nosun_tap_favorite"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:layout_gravity="center"
+			android:layout_weight="1"
+			android:gravity="center"
+			android:orientation="vertical" >
+
+			<TextView
+				android:id="@+id/nosun_tap_favorite_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="2dip"
+				android:text="노선정보"
+				android:textSize="14sp" />
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/nosun_tap_nosun"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:layout_gravity="center"
+			android:layout_weight="1"
+			android:gravity="center"
+			android:orientation="vertical" >
+
+			<TextView
+				android:id="@+id/nosun_tap_nosun_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="2dip"
+				android:text="실시간위치"
+				android:textSize="14sp" />
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/nosun_tap_busstop"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:layout_gravity="center"
+			android:layout_weight="1"
+			android:gravity="center"
+			android:orientation="vertical" >
+
+			<TextView
+				android:id="@+id/nosun_tap_busstop_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="2dip"
+				android:ellipsize="marquee"
+				android:focusable="true"
+				android:focusableInTouchMode="true"
+				android:marqueeRepeatLimit="marquee_forever"
+				android:singleLine="true"
+				android:text="상행선"
+				android:textSize="14sp" />
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/nosun_tap_setting"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:layout_gravity="center"
+			android:layout_weight="1"
+			android:gravity="center"
+			android:orientation="vertical" >
+
+			<TextView
+				android:id="@+id/nosun_tap_setting_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="2dip"
+				android:ellipsize="marquee"
+				android:focusable="true"
+				android:focusableInTouchMode="true"
+				android:marqueeRepeatLimit="marquee_forever"
+				android:singleLine="true"
+				android:text="하행선"
+				android:textSize="14sp" />
+		</LinearLayout>
+	</LinearLayout>
+
+	<ImageView
+		android:layout_width="fill_parent"
+		android:layout_height="1px"
+		android:background="#D2D2C8" />
+
+	<RelativeLayout
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_weight="1" >
+
+		<LinearLayout
+			android:id="@+id/layout_nosun_favorite"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:orientation="vertical"
+			android:visibility="gone" >
+
+			<TextView
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="12dip"
+				android:layout_marginTop="10dip"
+				android:gravity="center_vertical"
+				android:text="노선 정보"
+				android:textSize="16sp" />
+
+			<TextView
+				android:id="@+id/text_nosun_detail"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="10dip"
+				android:layout_marginLeft="12dip"
+				android:layout_marginTop="10dip"
+				android:gravity="center_vertical"
+				android:textColor="#7F7F72"
+				android:textSize="14sp" />
+
+			<ImageView
+				android:layout_width="fill_parent"
+				android:layout_height="1px"
+				android:background="#D2D2C8" />
+
+			<TextView
+				android:id="@+id/btn_nosun_map"
+				android:layout_width="fill_parent"
+				android:layout_height="48dip"
+				android:background="@drawable/list_selector"
+				android:gravity="center_vertical"
+				android:paddingLeft="12dip"
+				android:text="노선 지도보기"
+				android:textColor="#888888"
+				android:textSize="16sp"
+				android:textStyle="bold" />
+
+			<ImageView
+				android:layout_width="fill_parent"
+				android:layout_height="1px"
+				android:background="#D2D2C8" />
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/layout_nosun_nosun_search"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:visibility="gone" >
+
+			<RelativeLayout
+				android:id="@+id/bus_location"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent" >
+
+				<WebView
+					android:id="@+id/bus_location_webview"
+					android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:layout_gravity="center_vertical|center_horizontal"
+					android:clickable="false"
+					android:focusable="false"
+					android:scrollbars="none" />
+
+				<ProgressBar
+					android:id="@+id/bus_location_webview_reload_progress"
+					style="@style/loading"
+					android:layout_width="76dip"
+					android:layout_height="76dip"
+					android:layout_centerInParent="true"
+					android:background="@drawable/dialog_full_holo_light"
+					android:padding="20dip" />
+			</RelativeLayout>
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/layout_nosun_busstop_search"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:visibility="gone" >
+
+			<ListView
+				android:id="@+id/lv_up"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:cacheColorHint="@android:color/transparent"
+				android:fastScrollEnabled="true"
+				android:footerDividersEnabled="false"
+				android:headerDividersEnabled="false"
+				android:listSelector="@drawable/list_selector" />
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/layout_nosun_setting"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:visibility="gone" >
+
+			<ListView
+				android:id="@+id/lv_down"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:cacheColorHint="@android:color/transparent"
+				android:fastScrollEnabled="true"
+				android:footerDividersEnabled="false"
+				android:headerDividersEnabled="false"
+				android:listSelector="@drawable/list_selector" />
+		</LinearLayout>
+	</RelativeLayout>
+
+</LinearLayout>
