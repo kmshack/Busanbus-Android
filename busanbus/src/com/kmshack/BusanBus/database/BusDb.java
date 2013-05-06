@@ -57,12 +57,12 @@ public class BusDb {
 	public Cursor selectNosunForQuery(String query) {
 		String slq = "";
 
-		// ��� �뼱
+		// 모든 노선
 		if (query.length() <= 0 || query.equals("")) {
 			slq = "select _id, NOSUNNUM, START, END from BUSLINEINFO order by NOSUNNUM COLLATE LOCALIZED ASC";
 		}
 
-		// Ư�� �뼱
+		// 특정 노선
 		else {
 			slq = "select _id, NOSUNNUM, START, END from BUSLINEINFO where NOSUNNUM  like '%"
 					+ query + "%' order by NOSUNNUM COLLATE LOCALIZED ASC";
@@ -78,7 +78,7 @@ public class BusDb {
 
 		String slq = "";
 
-		// ����ҹ�ȣ �˻�
+		// 정류소번호 검색
 		if (query.subSequence(0, 1).toString().equals("0")
 				|| query.subSequence(0, 1).toString().equals("1")
 				|| query.subSequence(0, 1).toString().equals("5")) {
@@ -86,7 +86,7 @@ public class BusDb {
 					+ query + "%' group by UNIQUEID";
 		}
 
-		// ����Ҹ� �˻�
+		// 정류소명 검색
 		else {
 			slq = "select _id, BUSSTOPNAME, UNIQUEID from BUSLINE where BUSSTOPNAME  like '"
 					+ query + "%' group by UNIQUEID";
@@ -97,7 +97,7 @@ public class BusDb {
 	}
 
 	/**
-	 * Ư�� �뼱 ���� ���� ����
+	 * 특정 노선 정보 가져 오기
 	 * 
 	 * @param nosun
 	 * @return
@@ -111,7 +111,7 @@ public class BusDb {
 	}
 
 	/**
-	 * Ư�� �뼱 ���� ���� ����
+	 * 특정 노선 정보 가져 오기
 	 * 
 	 * @param nosun
 	 * @return
@@ -125,7 +125,7 @@ public class BusDb {
 	}
 
 	/**
-	 * Ư�� �뼱 ���� ���� ����
+	 * 특정 노선 정보 가져 오기
 	 * 
 	 * @param nosun
 	 * @return
@@ -139,7 +139,7 @@ public class BusDb {
 	}
 
 	/**
-	 * Ư�� �뼱 ���༱ ���� ����
+	 * 특정 노선 상행선 가져 오기
 	 * 
 	 * @param nosun
 	 * @return
@@ -158,7 +158,7 @@ public class BusDb {
 	}
 
 	/**
-	 * Ư�� �뼱 ���༱ ���� ����
+	 * 특정 노선 하행선 가져 오기
 	 * 
 	 * @param nosun
 	 * @return
@@ -177,14 +177,14 @@ public class BusDb {
 	}
 
 	/**
-	 * ����ҹ�ȣ->����� �̸�
+	 * 정류소번호->정류소 이름
 	 * 
 	 * @param nosun
 	 * @return
 	 */
 	public String selectStopIdToName(String stopid) {
 
-		String slq = "select " + "BUSSTOPNAME " + // ���� 7
+		String slq = "select " + "BUSSTOPNAME " + // 종점 7
 				"from BUSLINE where UNIQUEID ='" + stopid + "';";
 
 		Cursor cursor = mDb.rawQuery(slq, null);
@@ -201,7 +201,7 @@ public class BusDb {
 	}
 
 	/**
-	 * Ư�� �뼱 ���༱ ���� ����
+	 * 특정 노선 하행선 가져 오기
 	 * 
 	 * @param nosun
 	 * @return
@@ -210,21 +210,21 @@ public class BusDb {
 
 		String slq = "select "
 				+ "BUSLINEINFO.BUSLINEID, "
-				+ // ������ȣ ���̵� 0
+				+ // 버스번호 아이디 0
 				"BUSLINE.REALTIME, "
-				+ // �ǽð� �������� 1
+				+ // 실시간 도착정보 1
 				"BUSLINE.BUSLINENUM, "
-				+ // �뼱��ȣ 2
+				+ // 노선번호 2
 				"BUSLINEINFO.START, "
-				+ // ���� 3
+				+ // 시작 3
 				"BUSLINEINFO.MIDD, "
-				+ // �߰� 4
+				+ // 중간 4
 				"BUSLINEINFO.END, "
-				+ // ���� 5
+				+ // 종점 5
 				"BUSLINE.X, "
-				+ // ���� 6
+				+ // 종점 6
 				"BUSLINE.Y "
-				+ // ���� 7
+				+ // 종점 7
 				"from BUSLINE, BUSLINEINFO where BUSLINEINFO.NOSUNNUM=BUSLINE.BUSLINENUM and BUSLINE.UNIQUEID ='"
 				+ stopid + "' and BUSLINE.BUSLINENUM ='" + nosun
 				+ "' and BUSLINE.ORD =" + ord;
@@ -237,17 +237,17 @@ public class BusDb {
 
 		String slq = "select "
 				+ "BUSLINEINFO.BUSLINEID, "
-				+ // ������ȣ ���̵� 0
+				+ // 버스번호 아이디 0
 				"BUSLINE.REALTIME, "
-				+ // �ǽð� �������� 1
+				+ // 실시간 도착정보 1
 				"BUSLINE.BUSLINENUM, "
-				+ // �뼱��ȣ 2
+				+ // 노선번호 2
 				"BUSLINEINFO.START, "
-				+ // ���� 3
+				+ // 시작 3
 				"BUSLINEINFO.MIDD, "
-				+ // �߰� 4
+				+ // 중간 4
 				"BUSLINEINFO.END "
-				+ // ���� 5
+				+ // 종점 5
 				"from BUSLINE, BUSLINEINFO where BUSLINEINFO.NOSUNNUM=BUSLINE.BUSLINENUM and BUSLINE.UNIQUEID ='"
 				+ busstop + "'";
 
