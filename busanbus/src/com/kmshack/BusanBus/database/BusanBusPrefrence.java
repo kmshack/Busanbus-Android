@@ -8,7 +8,7 @@ import com.kmshack.BusanBus.App;
 import com.kmshack.BusanBus.activity.SearchMainActivity;
 
 /**
- * ¼³Á¤
+ * ì•± ì„¤ì •
  * @author kmshack
  *
  */

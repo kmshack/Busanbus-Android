@@ -28,7 +28,7 @@ import com.google.android.maps.OverlayItem;
 import com.kmshack.BusanBus.R;
 
 /**
- * Æ¯Á¤ ³ë¼±ÀÇ ¸ğµç Á¤·ù¼Ò Áöµµ
+ * íŠ¹ì • ë…¸ì„ ì˜ ëª¨ë“  ì •ë¥˜ì†Œ ì§€ë„
  * @author kmshack
  *
  */
@@ -51,7 +51,7 @@ public class NosunMapActivity extends BaseMapActivity {
 		mNosunName = intent.getStringExtra("NOSUN");
 		mCenterCount = intent.getIntExtra(("COUNT"), 1);
 
-		setTitleLeft(mNosunName + "¹ø ³ë¼±");
+		setTitleLeft(mNosunName + "ë²ˆ ë…¸ì„ ");
 
 		openDatabase();
 
@@ -244,17 +244,17 @@ public class NosunMapActivity extends BaseMapActivity {
 				final String id = mCursor.getString(9);
 
 				AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
-				alert.setTitle("Á¤·ù¼Ò È®ÀÎ");
-				alert.setMessage("Á¤·ù¼Ò ¸í: " + name + "\n" + "Á¤·ù¼Ò ¹øÈ£: " + id
-						+ "\n\n" + "µµÂøÁ¤º¸ ÆäÀÌÁö·Î ÀÌµ¿ ÇÏ½Ã°Ú½À´Ï±î?");
+				alert.setTitle("ì •ë¥˜ì†Œ í™•ì¸");
+				alert.setMessage("ì •ë¥˜ì†Œ ëª…: " + name + "\n" + "ì •ë¥˜ì†Œ ë²ˆí˜¸: " + id
+						+ "\n\n" + "ë„ì°©ì •ë³´ í˜ì´ì§€ë¡œ ì´ë™ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 
-				alert.setPositiveButton("¿¹",
+				alert.setPositiveButton("ì˜ˆ",
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								if (id.equals("0")) {
 									Toast.makeText(mContext,
-											"µµÂøÁ¤º¸°¡ Áö¿øµÇÁö ¾Ê´Â Á¤·ù¼ÒÀÔ´Ï´Ù.",
+											"ë„ì°©ì •ë³´ê°€ ì§€ì›ë˜ì§€ ì•ŠëŠ” ì •ë¥˜ì†Œì…ë‹ˆë‹¤.",
 											Toast.LENGTH_SHORT).show();
 									dialog.dismiss();
 								} else {
@@ -267,7 +267,7 @@ public class NosunMapActivity extends BaseMapActivity {
 							}
 						});
 
-				alert.setNegativeButton("¾Æ´Ï¿À",
+				alert.setNegativeButton("ì•„ë‹ˆì˜¤",
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,
 									int which) {

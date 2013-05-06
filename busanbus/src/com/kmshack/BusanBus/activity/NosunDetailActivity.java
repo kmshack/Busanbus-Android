@@ -11,7 +11,6 @@ import android.webkit.WebSettings.ZoomDensity;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -25,7 +24,7 @@ import com.kmshack.BusanBus.task.BaseAsyncTask.PostListener;
 import com.kmshack.BusanBus.task.HtmlAsync;
 
 /**
- * Æ¯Á¤ ³ë¼± »ó¼¼ 
+ * íŠ¹ì • ë…¸ì„  ìƒì„¸ 
  * @author kmshack
  *
  */
@@ -189,7 +188,7 @@ public class NosunDetailActivity extends BaseActivity {
 		Intent intent = getIntent();
 		mNosun = intent.getStringExtra("NoSun");
 
-		setTitleLeft(mNosun + "¹ø ³ë¼±");
+		setTitleLeft(mNosun + "ë²ˆ ë…¸ì„ ");
 
 		mTextInfo = (TextView) findViewById(R.id.nosun_tap_favorite_text);
 		mTextLocation = (TextView) findViewById(R.id.nosun_tap_nosun_text);
@@ -256,8 +255,8 @@ public class NosunDetailActivity extends BaseActivity {
 		});
 
 		setTabChange(DEFAULT_TAB);
-		String convertNosun = mNosun.replace("(½É¾ß)", "-F")
-				.replace("(¿ÀÀü)", "-F").replace("(A)", "").replace("(B)", "")
+		String convertNosun = mNosun.replace("(ì‹¬ì•¼)", "-F")
+				.replace("(ì˜¤ì „)", "-F").replace("(A)", "").replace("(B)", "")
 				.replace("A", "").replace("B", "");
 
 		String url = "http://121.174.75.12/03/0311.html.asp?m=2&linenm="
@@ -270,11 +269,11 @@ public class NosunDetailActivity extends BaseActivity {
 			public void onPost(String result) {
 				dismissDialog();
 
-				if (result.indexOf("°á°ú¾øÀ½") > 0) {
-					mTextNosunDetail.setText("¹ö½ºÁ¤º¸ ¾øÀ½.");
-				} else if (result.indexOf("¹ö½º¹øÈ£") > 0) {
-					String tmp1 = result.substring(result.indexOf("¹ö½º¹øÈ£") - 4,
-							result.indexOf("¸·Â÷½Ã°£") + 10);
+				if (result.indexOf("ê²°ê³¼ì—†ìŒ") > 0) {
+					mTextNosunDetail.setText("ë²„ìŠ¤ì •ë³´ ì—†ìŒ.");
+				} else if (result.indexOf("ë²„ìŠ¤ë²ˆí˜¸") > 0) {
+					String tmp1 = result.substring(result.indexOf("ë²„ìŠ¤ë²ˆí˜¸") - 4,
+							result.indexOf("ë§‰ì°¨ì‹œê°„") + 10);
 					String tmp2 = tmp1.replace("<br/>", "").replace("<br />",
 							"");
 					mTextNosunDetail.setText(tmp2);
@@ -302,8 +301,8 @@ public class NosunDetailActivity extends BaseActivity {
 			}
 		});
 
-		mTextUp.setText(intent.getStringExtra("Down") + "Çà");
-		mTextDown.setText(intent.getStringExtra("Up") + "Çà");
+		mTextUp.setText(intent.getStringExtra("Down") + "í–‰");
+		mTextDown.setText(intent.getStringExtra("Up") + "í–‰");
 
 	}
 
@@ -337,8 +336,8 @@ public class NosunDetailActivity extends BaseActivity {
 
 	private void doBusLocation() {
 		mWebView = (WebView) findViewById(R.id.bus_location_webview);
-		String convertNosun = mNosun.replace("(½É¾ß)", "-F")
-				.replace("(¿ÀÀü)", "-F").replace("(A)", "").replace("(B)", "")
+		String convertNosun = mNosun.replace("(ì‹¬ì•¼)", "-F")
+				.replace("(ì˜¤ì „)", "-F").replace("(A)", "").replace("(B)", "")
 				.replace("A", "").replace("B", "");
 
 		mWebView.loadUrl("http://121.174.75.12/bims/Menu03/code04_02.aspx?bno="

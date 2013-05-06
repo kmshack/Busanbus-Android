@@ -20,7 +20,6 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,7 +35,7 @@ import com.kmshack.BusanBus.database.BusanBusPrefrence;
 import com.kmshack.BusanBus.database.UserDb;
 
 /**
- * ¸ŞÀÎ °Ë»ö È­¸é
+ * ë©”ì¸ ê²€ìƒ‰ í™”ë©´
  * @author kmshack
  *
  */
@@ -375,7 +374,7 @@ public class SearchMainActivity extends BaseActivity {
 
 		setContentView(R.layout.main_common);
 		disableBack();
-		setTitleLeft("ºÎ»ê¹ö½º");
+		setTitleLeft("ë¶€ì‚°ë²„ìŠ¤");
 
 		mBusDb = BusDb.getInstance(getApplicationContext());
 		mUserDb = UserDb.getInstance(getApplicationContext());
@@ -466,7 +465,7 @@ public class SearchMainActivity extends BaseActivity {
 				null);
 		mNosunEditText = (EditText) mNosunSearchView
 				.findViewById(R.id.et_search_nosun);
-		mNosunEditText.setHint("³ë¼±¹øÈ£ °Ë»ö");
+		mNosunEditText.setHint("ë…¸ì„ ë²ˆí˜¸ ê²€ìƒ‰");
 		mNosunEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
 		mNosunEditText.addTextChangedListener(new TextWatcher() {
 			public void onTextChanged(CharSequence s, int start, int before,
@@ -522,7 +521,7 @@ public class SearchMainActivity extends BaseActivity {
 				null);
 		mBusStopEditText = (EditText) mBusstopSearchView
 				.findViewById(R.id.et_search_busstop);
-		mBusStopEditText.setHint("Á¤·ù¼Ò¸í/¹øÈ£ °Ë»ö");
+		mBusStopEditText.setHint("ì •ë¥˜ì†Œëª…/ë²ˆí˜¸ ê²€ìƒ‰");
 		mBusStopEditText.setInputType(InputType.TYPE_CLASS_TEXT);
 		mBusStopEditText.addTextChangedListener(new TextWatcher() {
 			public void onTextChanged(CharSequence s, int start, int before,
@@ -632,7 +631,7 @@ public class SearchMainActivity extends BaseActivity {
 		mFavoriteImageBusstop.setOnClickListener(mTabClickListener);
 
 		searchNosun("");
-		searchBusStop("ºÎ»ê");
+		searchBusStop("ë¶€ì‚°");
 
 		if (mBusanBusPrefrence.getIsFavoriteStart()) {
 			setTabChange(TAB_FAVORITE);
@@ -647,13 +646,13 @@ public class SearchMainActivity extends BaseActivity {
 
 		switch (mBusanBusPrefrence.getTextSize()) {
 		case 0:
-			mTextViewSettingTextSize.setText("º¸Åë");
+			mTextViewSettingTextSize.setText("ë³´í†µ");
 			break;
 		case 2:
-			mTextViewSettingTextSize.setText("Å©°Ô");
+			mTextViewSettingTextSize.setText("í¬ê²Œ");
 			break;
 		case 4:
-			mTextViewSettingTextSize.setText("¾ÆÁÖÅ©°Ô");
+			mTextViewSettingTextSize.setText("ì•„ì£¼í¬ê²Œ");
 			break;
 
 		}
@@ -698,7 +697,7 @@ public class SearchMainActivity extends BaseActivity {
 
 		mFavoriteListView.setAdapter(mFavoriteAdapter);
 
-		mFavoriteImageNosun.setText("³ë¼±(" + cursor.getCount() + ")");
+		mFavoriteImageNosun.setText("ë…¸ì„ (" + cursor.getCount() + ")");
 
 	}
 
@@ -710,10 +709,10 @@ public class SearchMainActivity extends BaseActivity {
 
 		mFavoriteListView.setAdapter(mFavoriteAdapter);
 
-		mFavoriteImageBusstop.setText("Á¤·ù¼Ò(" + cursor.getCount() + ")");
+		mFavoriteImageBusstop.setText("ì •ë¥˜ì†Œ(" + cursor.getCount() + ")");
 	}
 
-	// Back Key °ü·Ã
+	// Back Key ê´€ë ¨
 	private Handler mFinishHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -730,7 +729,7 @@ public class SearchMainActivity extends BaseActivity {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			if (!mFlag) {
 				Toast.makeText(getApplicationContext(),
-						"'µÚ·Î' ¹öÆ°À» ÇÑ¹ø ´õ ´©¸£½Ã¸é Á¾·áµË´Ï´Ù.", Toast.LENGTH_SHORT).show();
+						"'ë’¤ë¡œ' ë²„íŠ¼ì„ í•œë²ˆ ë” ëˆ„ë¥´ì‹œë©´ ì¢…ë£Œë©ë‹ˆë‹¤.", Toast.LENGTH_SHORT).show();
 				mFlag = true;
 				mFinishHandler.sendEmptyMessageDelayed(0, 2000);
 				return false;

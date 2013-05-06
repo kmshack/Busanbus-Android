@@ -16,7 +16,7 @@ import android.widget.ProgressBar;
 import com.kmshack.BusanBus.R;
 
 /**
- * °øÁö »çÇ×
+ * ê³µì§€ ì‚¬í•­
  * @author kmshack
  *
  */
@@ -30,7 +30,7 @@ public class WebActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.webview);
 
-		setTitleLeft("°øÁö»çÇ×");
+		setTitleLeft("ê³µì§€ì‚¬í•­");
 
 		mWebView = (WebView) findViewById(R.id.webview);
 		mWebView.scrollTo(0, 170);

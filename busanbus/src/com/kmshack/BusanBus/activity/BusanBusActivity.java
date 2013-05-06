@@ -22,7 +22,7 @@ import com.kmshack.BusanBus.R;
 
 /**
  *  Loading  Activity 
- *  DB¾÷µ¥ÀÌÆ® ÀÛ¾÷
+ *  DBì—…ë°ì´íŠ¸ ì‘ì—…
  * @author kmshack
  *
  */
@@ -30,7 +30,7 @@ public class BusanBusActivity extends Activity {
 	
 	private TextView mMsg;
 	
-	//ÃÖÁ¾ ¾÷µ¥ÀÌÆ®ÀÏ
+	//ìµœì¢… ì—…ë°ì´íŠ¸ì¼
 	private int mYear = 2012;
 	private int mMonth = 12;
 	private int mDay = 4;
@@ -70,7 +70,7 @@ public class BusanBusActivity extends Activity {
 	}
 	
 	/**
-	 *  ºĞÇÒµÈ ÆÄÀÏÀ» ÇÕÄ¡´Â ÀÛ¾÷
+	 *  ë¶„í• ëœ íŒŒì¼ì„ í•©ì¹˜ëŠ” ì‘ì—…
 	 * @author kmshack
 	 *
 	 */
@@ -133,7 +133,7 @@ public class BusanBusActivity extends Activity {
 			if(result){
 				mHandler.sendEmptyMessageDelayed(0, 700);
 			}else{
-				Toast.makeText(getApplicationContext(), "³ë¼± µ¥ÀÌÅÍ°¡ ¿Ã¹Ù¸£Áö ¾Ê¾Æ ½ÇÇà ÇÒ ¼ö ¾ø½À´Ï´Ù.", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), "ë…¸ì„  ë°ì´í„°ê°€ ì˜¬ë°”ë¥´ì§€ ì•Šì•„ ì‹¤í–‰ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.", Toast.LENGTH_LONG).show();
 				finish();
 			}
 		}

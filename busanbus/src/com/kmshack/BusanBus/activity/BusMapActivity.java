@@ -14,7 +14,7 @@ import com.kmshack.BusanBus.MapOverlay;
 import com.kmshack.BusanBus.R;
 
 /**
- * Æ¯Á¤ Á¤·ù¼Ò ÁöµµÀ§Ä¡ 
+ * íŠ¹ì • ì •ë¥˜ì†Œì˜ ìœ„ì¹˜í‘œì‹œ
  * @author kmshack
  *
  */

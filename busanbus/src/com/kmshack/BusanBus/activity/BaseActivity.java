@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.kmshack.BusanBus.R;
 
 /**
- * ¸ðµç ActivityÀÇ Base
+ * Activity Base
  * 
  * @author kmshack
  * 

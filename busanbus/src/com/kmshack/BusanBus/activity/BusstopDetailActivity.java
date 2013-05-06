@@ -16,7 +16,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,7 +25,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -44,9 +42,10 @@ import com.kmshack.BusanBus.task.BaseAsyncTask.PostListener;
 import com.kmshack.BusanBus.task.HtmlsAsync;
 
 /**
- * Æ¯Á¤ Á¤·ù¼Ò¿¡ ´ëÇÑ ¸ğµç ¹ö½ºÀÇ µµÂøÁ¤º¸
+ * íŠ¹ì • ì •ë¥˜ì†Œì— ëŒ€í•œ ëª¨ë“  ë²„ìŠ¤ì˜ ë„ì°©ì •ë³´
+ * 
  * @author kmshack
- *
+ * 
  */
 public class BusstopDetailActivity extends BaseMapActivity {
 
@@ -55,11 +54,13 @@ public class BusstopDetailActivity extends BaseMapActivity {
 	private ArrayList<MyItem> mItems;
 	private ListView mListView;
 	private TextView mTxtNosun;
-	private TextView mBtnMap, mBtnLocation, mBtnShortCut, mBtnFavorite, mShareKakao, mSorting;
+	private TextView mBtnMap, mBtnLocation, mBtnShortCut, mBtnFavorite,
+			mShareKakao, mSorting;
 	private ImageView mBtnRefresh;
 
 	private String mStopId, mStopName = "";
-	private String mInfoStopName = "", mInfoUniquId = "", mInfoGuName = "", mInfoDongName = "", mInfoX = "", mInfoY = "";
+	private String mInfoStopName = "", mInfoUniquId = "", mInfoGuName = "",
+			mInfoDongName = "", mInfoX = "", mInfoY = "";
 
 	private int mCount;
 
@@ -86,7 +87,7 @@ public class BusstopDetailActivity extends BaseMapActivity {
 		mStopId = intent.getStringExtra("BusStop");
 
 		if (mStopId == null || mStopId.equals("0")) {
-			Toast.makeText(getApplicationContext(), "Áö¿øÇÏÁö ¾Ê´Â Á¤·ù¼ÒÀÔ´Ï´Ù.",
+			Toast.makeText(getApplicationContext(), "ì§€ì›í•˜ì§€ ì•ŠëŠ” ì •ë¥˜ì†Œì…ë‹ˆë‹¤.",
 					Toast.LENGTH_SHORT).show();
 			finish();
 			return;
@@ -94,7 +95,8 @@ public class BusstopDetailActivity extends BaseMapActivity {
 
 		mBusDb = BusDb.getInstance(getApplicationContext());
 		mUserDb = UserDb.getInstance(getApplicationContext());
-		mBusanBusPrefrence = BusanBusPrefrence.getInstance(getApplicationContext());
+		mBusanBusPrefrence = BusanBusPrefrence
+				.getInstance(getApplicationContext());
 
 		LayoutInflater mInflater = (LayoutInflater) getApplicationContext()
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -147,10 +149,10 @@ public class BusstopDetailActivity extends BaseMapActivity {
 		mBtnMap.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				if (mMapView.getVisibility() == View.GONE) {
-					mBtnMap.setText("¡ã Áöµµ °¨Ãß±â");
+					mBtnMap.setText("â–² ì§€ë„ ê°ì¶”ê¸°");
 					mMapView.setVisibility(View.VISIBLE);
 				} else if (mMapView.getVisibility() == View.VISIBLE) {
-					mBtnMap.setText("¡å Áöµµ Ç¥½Ã");
+					mBtnMap.setText("â–¼ ì§€ë„ í‘œì‹œ");
 					mMapView.setVisibility(View.GONE);
 				}
 			}
@@ -162,7 +164,7 @@ public class BusstopDetailActivity extends BaseMapActivity {
 			}
 		});
 
-		// Áñ°ÜÃ£±â Ãß°¡
+		// ì¦ê²¨ì°¾ê¸° ì¶”ê°€
 		mBtnFavorite.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
 				toggleFavorite();
@@ -175,21 +177,21 @@ public class BusstopDetailActivity extends BaseMapActivity {
 			}
 		});
 
-		// »õ·Î°íÄ§ ¹öÆ° Å¬¸¯
+		// ìƒˆë¡œê³ ì¹¨ ë²„íŠ¼ í´ë¦­
 		mBtnRefresh.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				loadArrive();
 			}
 		});
 
-		// ÇöÀç Á¤·ù¼Ò À§Ä¡ È®ÀÎ ¹öÆ° Å¬¸¯
+		// í˜„ì¬ ì •ë¥˜ì†Œ ìœ„ì¹˜ í™•ì¸ ë²„íŠ¼ í´ë¦­
 		mBtnLocation.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent mapv = new Intent(BusstopDetailActivity.this,
 						BusMapActivity.class);
 				mapv.putExtra("X", mInfoX.toString());
 				mapv.putExtra("Y", mInfoY.toString());
-				mapv.putExtra("TITLE", mStopId + "¹ø ³ë¼± - " + mInfoStopName
+				mapv.putExtra("TITLE", mStopId + "ë²ˆ ë…¸ì„  - " + mInfoStopName
 						+ "(" + mInfoUniquId + ")");
 				mapv.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				startActivity(mapv);
@@ -199,9 +201,9 @@ public class BusstopDetailActivity extends BaseMapActivity {
 
 		mIsFavorite = mUserDb.isRegisterFavorite2(mStopId);
 		if (mIsFavorite) {
-			mBtnFavorite.setText("Áñ°ÜÃ£±â »èÁ¦");
+			mBtnFavorite.setText("ì¦ê²¨ì°¾ê¸° ì‚­ì œ");
 		} else {
-			mBtnFavorite.setText("Áñ°ÜÃ£±â Ãß°¡");
+			mBtnFavorite.setText("ì¦ê²¨ì°¾ê¸° ì¶”ê°€");
 		}
 
 		mListView.setOnItemClickListener(new OnItemClickListener() {
@@ -211,7 +213,7 @@ public class BusstopDetailActivity extends BaseMapActivity {
 				int realPosition = position - mListView.getHeaderViewsCount();
 
 				String tmp = mMyListAdapter.getItem(realPosition);
-				String nosun = tmp.substring(0, tmp.indexOf("¹ø ³ë¼± ")).replace(
+				String nosun = tmp.substring(0, tmp.indexOf("ë²ˆ ë…¸ì„  ")).replace(
 						" ", "");
 				String up = null;
 				String down = null;
@@ -240,10 +242,10 @@ public class BusstopDetailActivity extends BaseMapActivity {
 	}
 
 	private void loadArriveSorting() {
-		String isUse = mBusanBusPrefrence.getIsArriveSort() == true ? "È°¼º"
-				: "ºñÈ°¼º";
+		String isUse = mBusanBusPrefrence.getIsArriveSort() == true ? "í™œì„±"
+				: "ë¹„í™œì„±";
 
-		mSorting.setText("µµÂøÁ¤º¸ ºü¸¥¼øÀ¸·Î Á¤·Ä: " + isUse);
+		mSorting.setText("ë„ì°©ì •ë³´ ë¹ ë¥¸ìˆœìœ¼ë¡œ ì •ë ¬: " + isUse);
 	}
 
 	public void loadInformationForStopId() {
@@ -253,9 +255,9 @@ public class BusstopDetailActivity extends BaseMapActivity {
 		if (cursor.getCount() > 0) {
 
 			if (cursor.moveToNext()) {
-				mInfoStopName = "Á¤·ù¼Ò¸í: " + cursor.getString(3);
+				mInfoStopName = "ì •ë¥˜ì†Œëª…: " + cursor.getString(3);
 				mStopName = cursor.getString(3);
-				mInfoUniquId = "Á¤·ù¼Ò¹øÈ£: " + cursor.getString(9);
+				mInfoUniquId = "ì •ë¥˜ì†Œë²ˆí˜¸: " + cursor.getString(9);
 				mInfoGuName = cursor.getString(5);
 				mInfoDongName = cursor.getString(6);
 				mInfoX = cursor.getString(7).replace(" ", "");
@@ -294,7 +296,7 @@ public class BusstopDetailActivity extends BaseMapActivity {
 
 		if (mIsFavorite) {
 			if (mUserDb.deleteFavorite2(mStopId)) {
-				Toast.makeText(getApplicationContext(), "Áñ°ÜÃ£±â¸¦ »èÁ¦ ÇÏ¿´½À´Ï´Ù.",
+				Toast.makeText(getApplicationContext(), "ì¦ê²¨ì°¾ê¸°ë¥¼ ì‚­ì œ í•˜ì˜€ìŠµë‹ˆë‹¤.",
 						Toast.LENGTH_SHORT).show();
 				mIsFavorite = false;
 			}
@@ -303,9 +305,9 @@ public class BusstopDetailActivity extends BaseMapActivity {
 		}
 
 		if (mIsFavorite) {
-			mBtnFavorite.setText("Áñ°ÜÃ£±â »èÁ¦");
+			mBtnFavorite.setText("ì¦ê²¨ì°¾ê¸° ì‚­ì œ");
 		} else {
-			mBtnFavorite.setText("Áñ°ÜÃ£±â Ãß°¡");
+			mBtnFavorite.setText("ì¦ê²¨ì°¾ê¸° ì¶”ê°€");
 		}
 	}
 
@@ -315,30 +317,30 @@ public class BusstopDetailActivity extends BaseMapActivity {
 		renameText.setSelection(mStopName.length());
 
 		AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-		dialog.setTitle("Áñ°ÜÃ£±â ÀÌ¸§ ÀÔ·Â");
-		dialog.setMessage("Á¤·ù¼Ò Áñ°ÜÃ£±â ÀÌ¸§À» ÀÔ·Â ÇØÁÖ¼¼¿ä.")
+		dialog.setTitle("ì¦ê²¨ì°¾ê¸° ì´ë¦„ ì…ë ¥");
+		dialog.setMessage("ì •ë¥˜ì†Œ ì¦ê²¨ì°¾ê¸° ì´ë¦„ì„ ì…ë ¥ í•´ì£¼ì„¸ìš”.")
 				.setView(renameText)
 				.setCancelable(false)
-				.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+				.setPositiveButton("í™•ì¸", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 
 						if (mUserDb.insertFavorite2(renameText.getText()
 								.toString(), mStopId)) {
 							Toast.makeText(getApplicationContext(),
-									"Áñ°ÜÃ£±â¸¦ Ãß°¡ ÇÏ¿´½À´Ï´Ù.", Toast.LENGTH_SHORT)
+									"ì¦ê²¨ì°¾ê¸°ë¥¼ ì¶”ê°€ í•˜ì˜€ìŠµë‹ˆë‹¤.", Toast.LENGTH_SHORT)
 									.show();
 							mIsFavorite = true;
 						}
 
 						if (mIsFavorite) {
-							mBtnFavorite.setText("Áñ°ÜÃ£±â »èÁ¦");
+							mBtnFavorite.setText("ì¦ê²¨ì°¾ê¸° ì‚­ì œ");
 						} else {
-							mBtnFavorite.setText("Áñ°ÜÃ£±â Ãß°¡");
+							mBtnFavorite.setText("ì¦ê²¨ì°¾ê¸° ì¶”ê°€");
 						}
 
 					}
 				})
-				.setNegativeButton("Ãë¼Ò", new DialogInterface.OnClickListener() {
+				.setNegativeButton("ì·¨ì†Œ", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						dialog.cancel();
 					}
@@ -353,7 +355,7 @@ public class BusstopDetailActivity extends BaseMapActivity {
 
 		String strAppId = getPackageName();
 		String strAppVer = "2.0";
-		String strAppName = "ºÎ»ê¹ö½º";
+		String strAppName = "ë¶€ì‚°ë²„ìŠ¤";
 		String strInstallUrl = "market://details?id=com.kmshack.BusanBus";
 
 		try {
@@ -373,7 +375,7 @@ public class BusstopDetailActivity extends BaseMapActivity {
 			if (link.isAvailable()) {
 				startActivity(link.getIntent());
 			} else {
-				Toast.makeText(getApplicationContext(), "Ä«Ä«¿ÀÅå ¼³Ä¡ ÈÄ ÀÌ¿ë °¡´ÉÇÕ´Ï´Ù.",
+				Toast.makeText(getApplicationContext(), "ì¹´ì¹´ì˜¤í†¡ ì„¤ì¹˜ í›„ ì´ìš© ê°€ëŠ¥í•©ë‹ˆë‹¤.",
 						Toast.LENGTH_SHORT).show();
 			}
 		} catch (Exception e) {
@@ -399,43 +401,43 @@ public class BusstopDetailActivity extends BaseMapActivity {
 			final String url = "http://121.174.75.12/01/011.html.asp?bstop_id="
 					+ cursor.getString(1) + "&line_id=" + cursor.getString(0);
 			final HtmlsAsync task = new HtmlsAsync();
-			task.setTitle(cursor.getString(2) + "¹ø ³ë¼± / " + cursor.getString(3)
-					+ "¡ê" + cursor.getString(5));
+			task.setTitle(cursor.getString(2) + "ë²ˆ ë…¸ì„  / " + cursor.getString(3)
+					+ "â†”" + cursor.getString(5));
 			task.setOnTapUpListener(new PostListener() {
 				public void onPost(String html) {
 					mCount++;
 
 					String bstime;
 					if (html != null) {
-						if (html.indexOf("Â÷·®ÀÌ") != -1) {
+						if (html.indexOf("ì°¨ëŸ‰ì´") != -1) {
 							String infotmp1 = html.substring(
-									html.indexOf("ºĞÈÄ") - 2, html.indexOf("ºĞÈÄ"));
+									html.indexOf("ë¶„í›„") - 2, html.indexOf("ë¶„í›„"));
 							String infotmp2 = html.substring(
-									html.indexOf("¹øÂ°") - 2, html.indexOf("¹øÂ°"));
+									html.indexOf("ë²ˆì§¸") - 2, html.indexOf("ë²ˆì§¸"));
 							bstime = infotmp1.replace(" ", "0").toString()
-									+ "ºĞÈÄ, "
+									+ "ë¶„í›„, "
 									+ infotmp2.replace(" ", "").toString()
-									+ "¹øÂ° Àü Á¤·ù¼Ò";
+									+ "ë²ˆì§¸ ì „ ì •ë¥˜ì†Œ";
 
 							if (html.indexOf(">2.") != -1) {
 								String infotmp3 = html.substring(
-										html.lastIndexOf("ºĞÈÄ") - 2,
-										html.lastIndexOf("ºĞÈÄ"));
+										html.lastIndexOf("ë¶„í›„") - 2,
+										html.lastIndexOf("ë¶„í›„"));
 								String infotmp4 = html.substring(
-										html.lastIndexOf("¹øÂ°") - 2,
-										html.lastIndexOf("¹øÂ°"));
+										html.lastIndexOf("ë²ˆì§¸") - 2,
+										html.lastIndexOf("ë²ˆì§¸"));
 
 								bstime += "\n"
 										+ infotmp3.replace(" ", "0").toString()
-										+ "ºĞÈÄ, "
+										+ "ë¶„í›„, "
 										+ infotmp4.replace(" ", "").toString()
-										+ "¹øÂ° Àü Á¤·ù¼Ò";
+										+ "ë²ˆì§¸ ì „ ì •ë¥˜ì†Œ";
 							}
 						} else {
-							bstime = "µµÂøÁ¤º¸°¡ ¾ø½À´Ï´Ù.";
+							bstime = "ë„ì°©ì •ë³´ê°€ ì—†ìŠµë‹ˆë‹¤.";
 						}
 					} else {
-						bstime = "µµÂøÁ¤º¸°¡ ¾ø½À´Ï´Ù.";
+						bstime = "ë„ì°©ì •ë³´ê°€ ì—†ìŠµë‹ˆë‹¤.";
 					}
 
 					mMyItem = new MyItem(task.getTitle(), bstime.toString());
@@ -534,10 +536,10 @@ public class BusstopDetailActivity extends BaseMapActivity {
 
 		AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 		dialog.setIcon(R.drawable.ic_dialog_info);
-		dialog.setMessage("¹ÙÅÁÈ­¸é¿¡ ¹Ù·Î°¡±â ÀÌ¸§À» ÀÔ·Â ÇØÁÖ¼¼¿ä.")
+		dialog.setMessage("ë°”íƒ•í™”ë©´ì— ë°”ë¡œê°€ê¸° ì´ë¦„ì„ ì…ë ¥ í•´ì£¼ì„¸ìš”.")
 				.setView(renameText)
 				.setCancelable(false)
-				.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+				.setPositiveButton("í™•ì¸", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						Intent intent = new Intent();
 						intent.setComponent(new ComponentName(
@@ -560,18 +562,18 @@ public class BusstopDetailActivity extends BaseMapActivity {
 						sendBroadcast(result);
 
 						Toast.makeText(BusstopDetailActivity.this,
-								"¹ÙÅÁÈ­¸é ¹Ù·Î°¡±â »ı¼º ¿Ï·á.", Toast.LENGTH_SHORT).show();
+								"ë°”íƒ•í™”ë©´ ë°”ë¡œê°€ê¸° ìƒì„± ì™„ë£Œ.", Toast.LENGTH_SHORT).show();
 
 					}
 				})
-				.setNegativeButton("Ãë¼Ò", new DialogInterface.OnClickListener() {
+				.setNegativeButton("ì·¨ì†Œ", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						dialog.cancel();
 					}
 				});
-		
+
 		AlertDialog alert = dialog.create();
-		alert.setTitle("¹Ù·Î°¡±â ÀÌ¸§ ÀÔ·Â");
+		alert.setTitle("ë°”ë¡œê°€ê¸° ì´ë¦„ ì…ë ¥");
 		alert.setIcon(R.drawable.ic_dialog_info);
 		alert.setIcon(R.drawable.link);
 		alert.show();

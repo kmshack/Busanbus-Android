@@ -19,7 +19,7 @@ import com.google.android.maps.MapActivity;
 import com.kmshack.BusanBus.R;
 
 /**
- * ¸ðµç MapActivityÀÇ Base 
+ * MapActivity Base 
  * @author kmshack
  *
  */

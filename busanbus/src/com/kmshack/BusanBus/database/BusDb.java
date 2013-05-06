@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 
 /**
- * DB
+ * ë²„ìŠ¤ DB
  * @author kmshack
  *
  */
@@ -57,12 +57,12 @@ public class BusDb {
 	public Cursor selectNosunForQuery(String query) {
 		String slq = "";
 
-		// ¸ðµç ³ë¼±
+		// ï¿½ï¿½ï¿½ ï¿½ë¼±
 		if (query.length() <= 0 || query.equals("")) {
 			slq = "select _id, NOSUNNUM, START, END from BUSLINEINFO order by NOSUNNUM COLLATE LOCALIZED ASC";
 		}
 
-		// Æ¯Á¤ ³ë¼±
+		// Æ¯ï¿½ï¿½ ï¿½ë¼±
 		else {
 			slq = "select _id, NOSUNNUM, START, END from BUSLINEINFO where NOSUNNUM  like '%"
 					+ query + "%' order by NOSUNNUM COLLATE LOCALIZED ASC";
@@ -78,7 +78,7 @@ public class BusDb {
 
 		String slq = "";
 
-		// Á¤·ù¼Ò¹øÈ£ °Ë»ö
+		// ï¿½ï¿½ï¿½ï¿½Ò¹ï¿½È£ ï¿½Ë»ï¿½
 		if (query.subSequence(0, 1).toString().equals("0")
 				|| query.subSequence(0, 1).toString().equals("1")
 				|| query.subSequence(0, 1).toString().equals("5")) {
@@ -86,7 +86,7 @@ public class BusDb {
 					+ query + "%' group by UNIQUEID";
 		}
 
-		// Á¤·ù¼Ò¸í °Ë»ö
+		// ï¿½ï¿½ï¿½ï¿½Ò¸ï¿½ ï¿½Ë»ï¿½
 		else {
 			slq = "select _id, BUSSTOPNAME, UNIQUEID from BUSLINE where BUSSTOPNAME  like '"
 					+ query + "%' group by UNIQUEID";
@@ -97,7 +97,7 @@ public class BusDb {
 	}
 
 	/**
-	 * Æ¯Á¤ ³ë¼± Á¤º¸ °¡Á® ¿À±â
+	 * Æ¯ï¿½ï¿½ ï¿½ë¼± ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param nosun
 	 * @return
@@ -111,7 +111,7 @@ public class BusDb {
 	}
 
 	/**
-	 * Æ¯Á¤ ³ë¼± Á¤º¸ °¡Á® ¿À±â
+	 * Æ¯ï¿½ï¿½ ï¿½ë¼± ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param nosun
 	 * @return
@@ -125,7 +125,7 @@ public class BusDb {
 	}
 
 	/**
-	 * Æ¯Á¤ ³ë¼± Á¤º¸ °¡Á® ¿À±â
+	 * Æ¯ï¿½ï¿½ ï¿½ë¼± ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param nosun
 	 * @return
@@ -139,7 +139,7 @@ public class BusDb {
 	}
 
 	/**
-	 * Æ¯Á¤ ³ë¼± »óÇà¼± °¡Á® ¿À±â
+	 * Æ¯ï¿½ï¿½ ï¿½ë¼± ï¿½ï¿½ï¿½à¼± ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param nosun
 	 * @return
@@ -158,7 +158,7 @@ public class BusDb {
 	}
 
 	/**
-	 * Æ¯Á¤ ³ë¼± ÇÏÇà¼± °¡Á® ¿À±â
+	 * Æ¯ï¿½ï¿½ ï¿½ë¼± ï¿½ï¿½ï¿½à¼± ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param nosun
 	 * @return
@@ -177,14 +177,14 @@ public class BusDb {
 	}
 
 	/**
-	 * Á¤·ù¼Ò¹øÈ£->Á¤·ù¼Ò ÀÌ¸§
+	 * ï¿½ï¿½ï¿½ï¿½Ò¹ï¿½È£->ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
 	 * 
 	 * @param nosun
 	 * @return
 	 */
 	public String selectStopIdToName(String stopid) {
 
-		String slq = "select " + "BUSSTOPNAME " + // Á¾Á¡ 7
+		String slq = "select " + "BUSSTOPNAME " + // ï¿½ï¿½ï¿½ï¿½ 7
 				"from BUSLINE where UNIQUEID ='" + stopid + "';";
 
 		Cursor cursor = mDb.rawQuery(slq, null);
@@ -201,7 +201,7 @@ public class BusDb {
 	}
 
 	/**
-	 * Æ¯Á¤ ³ë¼± ÇÏÇà¼± °¡Á® ¿À±â
+	 * Æ¯ï¿½ï¿½ ï¿½ë¼± ï¿½ï¿½ï¿½à¼± ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param nosun
 	 * @return
@@ -210,21 +210,21 @@ public class BusDb {
 
 		String slq = "select "
 				+ "BUSLINEINFO.BUSLINEID, "
-				+ // ¹ö½º¹øÈ£ ¾ÆÀÌµð 0
+				+ // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ ï¿½ï¿½ï¿½Ìµï¿½ 0
 				"BUSLINE.REALTIME, "
-				+ // ½Ç½Ã°£ µµÂøÁ¤º¸ 1
+				+ // ï¿½Ç½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1
 				"BUSLINE.BUSLINENUM, "
-				+ // ³ë¼±¹øÈ£ 2
+				+ // ï¿½ë¼±ï¿½ï¿½È£ 2
 				"BUSLINEINFO.START, "
-				+ // ½ÃÀÛ 3
+				+ // ï¿½ï¿½ï¿½ï¿½ 3
 				"BUSLINEINFO.MIDD, "
-				+ // Áß°£ 4
+				+ // ï¿½ß°ï¿½ 4
 				"BUSLINEINFO.END, "
-				+ // Á¾Á¡ 5
+				+ // ï¿½ï¿½ï¿½ï¿½ 5
 				"BUSLINE.X, "
-				+ // Á¾Á¡ 6
+				+ // ï¿½ï¿½ï¿½ï¿½ 6
 				"BUSLINE.Y "
-				+ // Á¾Á¡ 7
+				+ // ï¿½ï¿½ï¿½ï¿½ 7
 				"from BUSLINE, BUSLINEINFO where BUSLINEINFO.NOSUNNUM=BUSLINE.BUSLINENUM and BUSLINE.UNIQUEID ='"
 				+ stopid + "' and BUSLINE.BUSLINENUM ='" + nosun
 				+ "' and BUSLINE.ORD =" + ord;
@@ -237,17 +237,17 @@ public class BusDb {
 
 		String slq = "select "
 				+ "BUSLINEINFO.BUSLINEID, "
-				+ // ¹ö½º¹øÈ£ ¾ÆÀÌµð 0
+				+ // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ ï¿½ï¿½ï¿½Ìµï¿½ 0
 				"BUSLINE.REALTIME, "
-				+ // ½Ç½Ã°£ µµÂøÁ¤º¸ 1
+				+ // ï¿½Ç½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1
 				"BUSLINE.BUSLINENUM, "
-				+ // ³ë¼±¹øÈ£ 2
+				+ // ï¿½ë¼±ï¿½ï¿½È£ 2
 				"BUSLINEINFO.START, "
-				+ // ½ÃÀÛ 3
+				+ // ï¿½ï¿½ï¿½ï¿½ 3
 				"BUSLINEINFO.MIDD, "
-				+ // Áß°£ 4
+				+ // ï¿½ß°ï¿½ 4
 				"BUSLINEINFO.END "
-				+ // Á¾Á¡ 5
+				+ // ï¿½ï¿½ï¿½ï¿½ 5
 				"from BUSLINE, BUSLINEINFO where BUSLINEINFO.NOSUNNUM=BUSLINE.BUSLINENUM and BUSLINE.UNIQUEID ='"
 				+ busstop + "'";
 

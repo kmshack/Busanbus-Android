@@ -8,13 +8,16 @@ import android.os.Bundle;
 import android.os.Environment;
 
 /**
- * Æ¯Á¤ ³ë¼±ÀÇ Á¤·ù¼Ò *
- * busanbus://line/detail?nosun=xxxxx&uniqueid=xxxxx&ord=xxxxx&busstopname
- * =xxxxx&updown=xxxxx
+ *  scheme  
  * 
- * Á¤·ù¼Ò * busanbus://stop/detail?busstop=xxxxx
+ * íŠ¹ì • ë…¸ì„ ì˜ ì •ë¥˜ì†Œ *
+ * busanbus://line/detail?nosun=xxxxx&uniqueid=xxxxx&ord=xxxxx&busstopname=xxxxx&updown=xxxxx
  * 
- * È¨ * busanbus://home
+ * ì •ë¥˜ì†Œ * 
+ * busanbus://stop/detail?busstop=xxxxx
+ * 
+ * í™ˆ * 
+ * busanbus://home
  * 
  * @author KMSHACK
  * 
@@ -45,7 +48,7 @@ public class GateActivity extends BaseActivity {
 			String path = uri.getPath();
 			if (scheme.equals("busanbus")) {
 
-				if (host.equals("line")) { // Æ¯Á¤ ³ë¼±ÀÇ Á¤·ù¼Ò
+				if (host.equals("line")) { // íŠ¹ì • ë…¸ì„ ì˜ ì •ë¥˜ì†Œ
 
 					if (path.equals("/detail")) {
 						Intent i = new Intent(this, BusArriveActivity.class);
@@ -59,14 +62,14 @@ public class GateActivity extends BaseActivity {
 						i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 						startActivity(i);
 					}
-				} else if (host.equals("stop")) { // Á¤·ù¼Ò
+				} else if (host.equals("stop")) { // ì •ë¥˜ì†Œ
 					if (path.equals("/detail")) {
 						Intent i = new Intent(this, BusstopDetailActivity.class);
 						i.putExtra("BusStop", uri.getQueryParameter("busstop"));
 						i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 						startActivity(i);
 					}
-				} else if (host.equals("home")) { // È¨
+				} else if (host.equals("home")) { // í™ˆ
 					Intent i = new Intent(this, BusanBusActivity.class);
 					i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 					startActivity(i);

@@ -6,6 +6,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+/**
+ * ì¦ê²¨ì°¾ê¸° ê´€ë ¨ DB
+ * @author kmshack
+ *
+ */
 public class UserDb {
 
 	private static UserDb sInstance;
@@ -53,7 +58,7 @@ public class UserDb {
 	}
 
 	/**
-	 * ¸ğµç Áñ°ÜÃ£±âµÈ ³ë¼± °¡Á®¿À±â
+	 * ëª¨ë“  ì¦ê²¨ì°¾ê¸°ëœ ë…¸ì„  ê°€ì ¸ì˜¤ê¸°
 	 * 
 	 * @return
 	 */
@@ -63,7 +68,7 @@ public class UserDb {
 	}
 
 	/**
-	 * Æ¯Á¤ Áñ°ÜÃ£±âµÈ ³ë¼± »èÁ¦
+	 * íŠ¹ì • ì¦ê²¨ì°¾ê¸°ëœ ë…¸ì„  ì‚­ì œ
 	 * 
 	 * @param id
 	 * @return
@@ -80,7 +85,7 @@ public class UserDb {
 	}
 
 	/**
-	 * ¸ğµç ¹ö½ºÁ¤·ù¼Ò °¡Á®¿À±â
+	 * ëª¨ë“  ë²„ìŠ¤ì •ë¥˜ì†Œ ê°€ì ¸ì˜¤ê¸°
 	 * 
 	 * @return
 	 */
@@ -90,7 +95,7 @@ public class UserDb {
 	}
 
 	/**
-	 * Æ¯Á¤ Áñ°ÜÃ£±âµÈ ¹ö½ºÁ¤·ù¼Ò »èÁ¦
+	 * íŠ¹ì • ì¦ê²¨ì°¾ê¸°ëœ ë²„ìŠ¤ì •ë¥˜ì†Œ ì‚­ì œ
 	 * 
 	 * @param id
 	 * @return
@@ -107,7 +112,7 @@ public class UserDb {
 	}
 
 	/**
-	 * Æ¯Á¤ Áñ°ÜÃ£±âµÈ ¹ö½ºÁ¤·ù¼Ò »èÁ¦
+	 * íŠ¹ì • ì¦ê²¨ì°¾ê¸°ëœ ë²„ìŠ¤ì •ë¥˜ì†Œ ì‚­ì œ
 	 * 
 	 * @param id
 	 * @return
@@ -133,7 +138,7 @@ public class UserDb {
 	}
 
 	/**
-	 * Æ¯Á¤ Áñ°ÜÃ£±âµÈ ¹ö½ºÁ¤·ù¼Ò »èÁ¦
+	 * íŠ¹ì • ì¦ê²¨ì°¾ê¸°ëœ ë²„ìŠ¤ì •ë¥˜ì†Œ ì‚­ì œ
 	 * 
 	 * @param id
 	 * @return
@@ -152,7 +157,7 @@ public class UserDb {
 	}
 
 	/**
-	 * Æ¯Á¤ Áñ°ÜÃ£±âµÈ °Í ÀÖ´ÂÁö ¿©ºÎ
+	 * íŠ¹ì • ì¦ê²¨ì°¾ê¸°ëœ ê²ƒ ìˆëŠ”ì§€ ì—¬ë¶€
 	 * 
 	 * @param id
 	 * @return
@@ -174,7 +179,7 @@ public class UserDb {
 	}
 
 	/**
-	 * Ãß°¡
+	 * ì¶”ê°€
 	 * 
 	 * @param id
 	 * @return
@@ -192,7 +197,7 @@ public class UserDb {
 	}
 
 	/**
-	 * »èÁ¦
+	 * ì‚­ì œ
 	 * 
 	 * @param id
 	 * @return
@@ -210,7 +215,7 @@ public class UserDb {
 	}
 
 	/**
-	 * Æ¯Á¤ Áñ°ÜÃ£±âµÈ °Í ÀÖ´ÂÁö ¿©ºÎ
+	 * íŠ¹ì • ì¦ê²¨ì°¾ê¸°ëœ ê²ƒ ìˆëŠ”ì§€ ì—¬ë¶€
 	 * 
 	 * @param id
 	 * @return
