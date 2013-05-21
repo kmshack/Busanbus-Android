@@ -13,7 +13,7 @@
 		android:layout_marginLeft="14dip"
 		android:layout_marginRight="8dip"
 		android:layout_weight="1"
-		android:orientation="vertical" >
+		android:orientation="vertical">
 
 		<com.kmshack.BusanBus.view.SizeableTextView
 			android:id="@+id/text1"
@@ -24,7 +24,7 @@
 
 		<LinearLayout
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" >
+			android:layout_height="wrap_content">
 
 			<com.kmshack.BusanBus.view.SizeableTextView
 				android:id="@+id/text2"
