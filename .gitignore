@@ -2,10 +2,6 @@
 bin
 gen
 
-#Eclipse
-.classpath
-.settings
-
 #IntelliJ IDEA
 .idea
 *.iml
