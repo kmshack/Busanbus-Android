@@ -1,4 +1,4 @@
-Busanbus for Android
+Busanbus for Android 2.2.4
 ========
 
 <br/>
@@ -6,12 +6,6 @@ Busanbus for Android
 부산버스 안드로이드 앱 ( http://play.google.com/store/apps/details?id=com.kmshack.BusanBus ) 오픈소스화 합니다. 
 
 <br/>
-
-부산버스 안드로이드 앱의 코드를 공개한 이유는 몇십만 시민이 쓰는 앱을 한사람의 개인개발자가 운영 또는 기능에 대한 의사결한정을 하기에 힘들다고 판단 하였습니다.
-또한 코드오픈을 통해 좀더 많은 개발자들이 협력 한다면 더 좋을 앱이 나오지 않을까라는 생각하게 되었습니다.
-
-<br/>
-오픈 소스화는 더 이상 업데이트하지 않겠다는 의미가 아니라 개발자들 또는 사용자분들과 협력하여 더 나은 앱으로 만들어가겠다는 의지임을 알아 주셨으면 좋겠습니다.
 
 <br/>
 
@@ -42,7 +36,7 @@ Busanbus for Android
 주의점 및 참고사항
 -----
 
-- 구글 지도는 프로젝트내 string.xml의 google_api_key를 별도로 발급받으셔야 지도가 사용 가능합니다.
+- 구글 지도 V2는 Android Manifest의 meta-data에 Key를 발급 받은 후 등록 하셔야 합니다.<meta-data	android:name="com.google.android.maps.v2.API_KEY"	android:value="Your Goolge Maps API V2 Key" />
 
 - 버스와 노선 관련 데이터파일과 수집 방법에 대한 방법은 database를 참고 하시면 됩니다.
 
