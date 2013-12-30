@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="trans">#00000000</color>
-    <color name="actionselect">#637FB2</color>
+
+	<color name="trans">#00000000</color>
+	<color name="actionselect">#637FB2</color>
+	<color name="background">#F7F7F0</color>
+	<color name="bar">#E7E7E0</color>
+
 </resources>

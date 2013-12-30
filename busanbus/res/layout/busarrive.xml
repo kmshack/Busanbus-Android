@@ -37,16 +37,21 @@
 					android:textSize="15sp"
 					android:textStyle="bold" />
 
-				<com.google.android.maps.MapView
-					xmlns:android="http://schemas.android.com/apk/res/android"
-					android:id="@+id/mapview"
-					android:layout_width="fill_parent"
+				<FrameLayout
+					android:id="@+id/layout_map"
+					android:layout_width="match_parent"
 					android:layout_height="150dip"
 					android:layout_marginBottom="10dip"
 					android:layout_marginLeft="12dip"
 					android:layout_marginRight="12dip"
-					android:apiKey="@string/google_map_api_key"
-					android:clickable="true" />
+					android:clickable="true" >
+
+					<fragment
+						android:id="@+id/map"
+						android:name="com.google.android.gms.maps.SupportMapFragment"
+						android:layout_width="match_parent"
+						android:layout_height="150dip" />
+				</FrameLayout>
 
 				<ImageView
 					android:layout_width="fill_parent"
@@ -104,14 +109,16 @@
 				<TextView
 					android:id="@+id/busarrive_bt2"
 					android:layout_width="fill_parent"
-					android:layout_height="48dip"
+					android:layout_height="56dip"
 					android:layout_gravity="center_vertical"
 					android:background="@drawable/list_selector"
+					android:drawableLeft="@drawable/ic_refresh_normal"
+					android:drawablePadding="8dip"
 					android:gravity="center_vertical"
 					android:padding="10dip"
 					android:text="새로고침"
 					android:textColor="#777777"
-					android:textSize="17sp"
+					android:textSize="16sp"
 					android:textStyle="bold" />
 
 				<ImageView
@@ -122,9 +129,12 @@
 				<TextView
 					android:id="@+id/busarrive_bt1"
 					android:layout_width="fill_parent"
-					android:layout_height="48dip"
+					android:layout_height="56dip"
 					android:layout_gravity="center_vertical"
 					android:background="@drawable/list_selector"
+					android:drawableLeft="@drawable/ic_main_tab_favorite_normal"
+					android:drawablePadding="8dip"
+					
 					android:gravity="center_vertical"
 					android:padding="10dip"
 					android:text="즐겨찾기 추가"
@@ -140,9 +150,11 @@
 				<TextView
 					android:id="@+id/busarrive_bt0"
 					android:layout_width="fill_parent"
-					android:layout_height="48dip"
+					android:layout_height="56dip"
 					android:layout_gravity="center_vertical"
 					android:background="@drawable/list_selector"
+					android:drawableLeft="@drawable/ic_main_tab_right_normal"
+					android:drawablePadding="8dip"
 					android:gravity="center_vertical"
 					android:padding="10dip"
 					android:text="바로가기 만들기"
@@ -158,9 +170,11 @@
 				<TextView
 					android:id="@+id/busstopdetail_locationbt"
 					android:layout_width="fill_parent"
-					android:layout_height="48dip"
+					android:layout_height="56dip"
 					android:layout_gravity="center_vertical"
 					android:background="@drawable/list_selector"
+					android:drawableLeft="@drawable/ic_main_tab_location_normal"
+					android:drawablePadding="8dip"
 					android:gravity="center_vertical"
 					android:padding="10dip"
 					android:text="정류소 위치 확인"
@@ -176,7 +190,7 @@
 				<TextView
 					android:id="@+id/busarrive_bt3"
 					android:layout_width="fill_parent"
-					android:layout_height="48dip"
+					android:layout_height="56dip"
 					android:layout_gravity="center_vertical"
 					android:background="@drawable/list_selector"
 					android:gravity="center_vertical"

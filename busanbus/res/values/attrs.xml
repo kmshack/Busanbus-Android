@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<declare-styleable name="com.cauly.android.ad.AdView">
+		<attr name="appcode" format="string" /> <attr name="effect" format="string" />
+		<attr name="gps" format="string" />
+		<attr name="allowcall" format="boolean" />
+		<attr name="dynamicReloadInterval" format="boolean" />
+		<attr name="reloadInterval" format="integer" />
+		<attr name="threadPriority" format="integer" />
+		<attr name="bannerHeight" format="string" />
+	</declare-styleable>
+</resources>

@@ -1,285 +1,163 @@
 package com.kmshack.BusanBus.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import kr.hyosang.coordinate.CoordPoint;
-import kr.hyosang.coordinate.TransCoord;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Point;
-import android.graphics.drawable.Drawable;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
-import android.widget.Toast;
 
-import com.google.android.maps.GeoPoint;
-import com.google.android.maps.ItemizedOverlay;
-import com.google.android.maps.MapView;
-import com.google.android.maps.MyLocationOverlay;
-import com.google.android.maps.Overlay;
-import com.google.android.maps.OverlayItem;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.kmshack.BusanBus.R;
+import com.kmshack.BusanBus.database.BusDb;
 
-/**
- * 특정 노선의 모든 정류소 지도
- * @author kmshack
- *
- */
-public class NosunMapActivity extends BaseMapActivity {
-	private SQLiteDatabase mDb;
-	private String mNosunName;
+public class NosunMapActivity extends BaseActivity {
+	SQLiteDatabase db;
+	String nosunnum;
+	String rex, rey;
+	int c;
+
+	private GoogleMap mGoogleMap;
+	private BusDb mBusDb;
 	public Cursor mCursor;
-	private int mCenterCount;
-
-	private MapView mMapView = null;
-	private MyLocationOverlay mMyLocationOverlay = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.map);
+		mBusDb = BusDb.getInstance(getApplicationContext());
+
+		try {
+			initilizeMap();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		Intent intent = getIntent();
-		mNosunName = intent.getStringExtra("NOSUN");
-		mCenterCount = intent.getIntExtra(("COUNT"), 1);
+		nosunnum = intent.getStringExtra("NOSUN");
 
-		setTitleLeft(mNosunName + "번 노선");
+		setTitle(nosunnum + "�� �뼱");
 
-		openDatabase();
+		tracker.trackPageView("/NosunMap");
 
-		mCursor = mDb.rawQuery("select * from BUSLINE where BUSLINENUM ='"
-				+ mNosunName.toString() + "'", null);
+		mCursor = mBusDb.selectBusline(nosunnum);
 
-		startManagingCursor(mCursor);
+		if (mCursor.moveToFirst()) {
 
-		mMapView = (MapView) findViewById(R.id.mapview);
-		mMapView.getController().setZoom(14);
-		mMapView.setBuiltInZoomControls(true);
+			int count = mCursor.getCount();
 
-		Drawable marker = getResources().getDrawable(R.drawable.marker_special);
+			int center = count / 2;
+			int doubleCenter = count / 4;
 
-		mMapView.getOverlays().add(new SitesOverlay(marker, this));
+			LatLng centerLatlng = null;
+			LatLng beforeLatlng = null;
+			LatLng currentLatlng = null;
 
-		mMyLocationOverlay = new MyLocationOverlay(this, mMapView);
-		mMapView.getOverlays().add(mMyLocationOverlay);
-		mMapView.getOverlays().add(new LinesOverlay(mCursor, mMapView));
-
-	}
-
-	@Override
-	protected boolean isRouteDisplayed() {
-		return false;
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		mMyLocationOverlay.enableCompass();
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		mMyLocationOverlay.disableCompass();
-	}
-
-	private void openDatabase() {
-		try {
-			mDb = SQLiteDatabase
-					.openDatabase(
-							Environment.getExternalStorageDirectory().getPath()
-									+ "/Android/data/com.kmshack.BusanBus/databases/BusData.kms",
-							null, SQLiteDatabase.CREATE_IF_NECESSARY);
-		} catch (Exception e) {
-		}
-	}
-
-	private GeoPoint getPoint(double lat, double lon) {
-		return (new GeoPoint((int) (lat * 1000000.0), (int) (lon * 1000000.0)));
-	}
-
-	private class LinesOverlay extends Overlay {
-
-		private Cursor mCursor;
-		private Point targetPosition;
-		private Point startPosition;
-		private CoordPoint tm;
-		private CoordPoint wgs;
-		private Paint paintLine;
-		private GeoPoint start[];
-		private GeoPoint end[];
-
-		public LinesOverlay(Cursor cursor, MapView mapview) {
-			mCursor = cursor;
-			targetPosition = new Point();
-			startPosition = new Point();
-
-			paintLine = new Paint();
-			paintLine.setStrokeWidth(6);
-
-			start = new GeoPoint[mCursor.getCount()];
-			end = new GeoPoint[mCursor.getCount()];
-
-			for (int i = 0; i < mCursor.getCount(); i++) {
-
-				if (mCursor.moveToPosition(i)) {
-					tm = new CoordPoint(Double.parseDouble(mCursor.getString(7)
-							.replace(" ", "").toString()),
-							Double.parseDouble(mCursor.getString(8)
-									.replace(" ", "").toString()));
-					wgs = TransCoord.getTransCoord(tm,
-							TransCoord.COORD_TYPE_WGS84,
-							TransCoord.COORD_TYPE_WGS84);
-					start[i] = getPoint(wgs.y, wgs.x);
-
-					if (mCursor.moveToNext()) {
-						tm = new CoordPoint(Double.parseDouble(mCursor
-								.getString(7).replace(" ", "").toString()),
-								Double.parseDouble(mCursor.getString(8)
-										.replace(" ", "").toString()));
-						wgs = TransCoord.getTransCoord(tm,
-								TransCoord.COORD_TYPE_WGS84,
-								TransCoord.COORD_TYPE_WGS84);
-						end[i] = getPoint(wgs.y, wgs.x);
-					}
-				}
-			}
-
-		}
-
-		@Override
-		public void draw(Canvas canvas, MapView mapView, boolean shadow) {
-
-			for (int i = 0; i < mCursor.getCount(); i++) {
-				if (mCursor.moveToPosition(i)) {
-					if (start[i] != null)
-						mapView.getProjection().toPixels(start[i],
-								startPosition);
-
-					if (mCursor.moveToNext()) {
-						if (end[i] != null)
-							mapView.getProjection().toPixels(end[i],
-									targetPosition);
-
-						if (i > mCursor.getCount() / 2) {
-							paintLine.setARGB(80, 255, 150, 0);
-							canvas.drawLine(startPosition.x, startPosition.y,
-									targetPosition.x, targetPosition.y,
-									paintLine);
-						} else {
-							paintLine.setARGB(80, 0, 255, 0);
-							canvas.drawLine(startPosition.x, startPosition.y,
-									targetPosition.x, targetPosition.y,
-									paintLine);
-						}
-
-					}
-				}
-			}
-
-			super.draw(canvas, mapView, shadow);
-		}
-
-	}
-
-	private class SitesOverlay extends ItemizedOverlay<OverlayItem> {
-		private List<OverlayItem> items = new ArrayList<OverlayItem>();
-		private Drawable marker = null;
-		private Context mContext;
-
-		public SitesOverlay(Drawable marker, Context context) {
-			super(marker);
-			mContext = context;
-			this.marker = marker;
-
-			mCursor.moveToFirst();
-
-			CoordPoint tm;
-			CoordPoint wgs;
+			int lineColorForUpper = Color.parseColor("#550000FF");
+			int lineColorForDownner = Color.parseColor("#5500FF00");
 
 			while (mCursor.moveToNext()) {
-				tm = new CoordPoint(Double.parseDouble(mCursor.getString(7)
-						.replace(" ", "").toString()),
-						Double.parseDouble(mCursor.getString(8)
-								.replace(" ", "").toString()));
-				wgs = TransCoord.getTransCoord(tm, TransCoord.COORD_TYPE_WGS84,
-						TransCoord.COORD_TYPE_WGS84);
 
-				items.add(new OverlayItem(getPoint(wgs.y, wgs.x), null, null));
+				int position = mCursor.getPosition();
+				double latitude = mCursor.getDouble(8);
+				double longitude = mCursor.getDouble(7);
 
-				if (mCursor.getPosition() == mCenterCount)
-					mMapView.getController().setCenter(getPoint(wgs.y, wgs.x));
+				String id = mCursor.getString(9);
+				String name = mCursor.getString(3);
+
+				if (mGoogleMap != null) {
+					currentLatlng = new LatLng(latitude, longitude);
+
+					MarkerOptions marker = new MarkerOptions().position(currentLatlng).title(position + ". " + name).snippet(id);
+					if (center < position) {
+						marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+						if (beforeLatlng != null) {
+							mGoogleMap.addPolyline(new PolylineOptions().add(beforeLatlng, currentLatlng).geodesic(true).width(7).color(lineColorForUpper));
+						}
+
+					} else {
+						marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+						if (beforeLatlng != null) {
+							mGoogleMap.addPolyline(new PolylineOptions().add(beforeLatlng, currentLatlng).geodesic(true).width(7).color(lineColorForDownner));
+						}
+					}
+
+					if (position == doubleCenter) {
+						centerLatlng = currentLatlng;
+					}
+
+					beforeLatlng = currentLatlng;
+
+					if (position == 1)
+						mGoogleMap.addMarker(marker).showInfoWindow();
+					else
+						mGoogleMap.addMarker(marker);
+				}
 			}
-			populate();
-		}
 
-		@Override
-		protected OverlayItem createItem(int i) {
-			return (items.get(i));
-		}
+			if (mGoogleMap != null) {
+				CameraPosition INIT = new CameraPosition.Builder().target(centerLatlng).zoom(11F).bearing(0F) // orientation
+						.tilt(0F) // viewing angle
+						.build();
+				mGoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(INIT));
 
-		@Override
-		public void draw(Canvas canvas, MapView mapView, boolean shadow) {
-			super.draw(canvas, mapView, shadow);
-			boundCenterBottom(marker);
-		}
+				mGoogleMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
 
-		@Override
-		public int size() {
-			return (items.size());
-		}
-
-		@Override
-		protected boolean onTap(int index) {
-			if (mCursor.moveToPosition(index + 1)) {
-				final String name = mCursor.getString(3);
-				final String id = mCursor.getString(9);
-
-				AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
-				alert.setTitle("정류소 확인");
-				alert.setMessage("정류소 명: " + name + "\n" + "정류소 번호: " + id
-						+ "\n\n" + "도착정보 페이지로 이동 하시겠습니까?");
-
-				alert.setPositiveButton("예",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int which) {
-								if (id.equals("0")) {
-									Toast.makeText(mContext,
-											"도착정보가 지원되지 않는 정류소입니다.",
-											Toast.LENGTH_SHORT).show();
-									dialog.dismiss();
-								} else {
-									Intent busarr = new Intent(mContext,
-											BusstopDetailActivity.class);
-									busarr.putExtra("BusStop", id);
-									busarr.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-									startActivity(busarr);
-								}
-							}
-						});
-
-				alert.setNegativeButton("아니오",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int which) {
-								dialog.dismiss();
-							}
-						});
-
-				alert.show();
+					public void onInfoWindowClick(Marker marker) {
+						Intent intent = new Intent(getApplicationContext(), BusstopDetailActivity.class);
+						intent.putExtra("BusStop", marker.getSnippet());
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(intent);
+					}
+				});
 			}
-			return true;
 		}
 
+	}
+
+	@Override
+	protected void onDestroy() {
+		if (mCursor != null && !mCursor.isClosed())
+			mCursor.close();
+
+		super.onDestroy();
+	}
+
+	/**
+	 * function to load map. If map is not created it will create it for you
+	 * */
+	private void initilizeMap() {
+		if (mGoogleMap == null) {
+			mGoogleMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+
+			if (mGoogleMap == null) {
+			} else {
+				mGoogleMap.setMyLocationEnabled(true);
+				mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
+				mGoogleMap.getUiSettings().setZoomGesturesEnabled(true);
+				mGoogleMap.getUiSettings().setMyLocationButtonEnabled(true);
+
+				CameraPosition INIT = new CameraPosition.Builder().target(new LatLng(35.1796F, 129.076F)).zoom(10F).bearing(0F) // orientation
+						.tilt(0F) // viewing angle
+						.build();
+				mGoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(INIT));
+			}
+		}
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		initilizeMap();
 	}
 
 }

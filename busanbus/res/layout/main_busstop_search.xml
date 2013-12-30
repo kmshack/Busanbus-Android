@@ -9,7 +9,8 @@
 	<LinearLayout
 		android:id="@+id/search_busstop"
 		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" >
+		android:layout_height="wrap_content"
+		android:orientation="horizontal" >
 	</LinearLayout>
 
 	<ListView
@@ -18,6 +19,7 @@
 		android:layout_height="fill_parent"
 		android:layout_weight="1"
 		android:cacheColorHint="@android:color/transparent"
+		android:dividerHeight="1px"
 		android:fadingEdge="none"
 		android:fastScrollEnabled="true"
 		android:footerDividersEnabled="true"

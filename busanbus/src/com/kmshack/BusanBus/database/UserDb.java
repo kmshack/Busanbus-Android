@@ -2,238 +2,294 @@ package com.kmshack.BusanBus.database;
 
 import java.io.File;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
-/**
- * ì¦ê²¨ì°¾ê¸° ê´€ë ¨ DB
- * @author kmshack
- *
- */
+import com.kmshack.BusanBus.database.Constants.UserData;
+
 public class UserDb {
+	
 
 	private static UserDb sInstance;
 	private Context mContext;
 	private SQLiteDatabase mDb;
-
-	private UserDb(Context context) {
+	
+	private UserDb(Context context){
 		mContext = context;
 	}
-
-	public synchronized static UserDb getInstance(Context context) {
-
-		if (sInstance != null && sInstance.mDb != null) {
+	
+	public synchronized static UserDb getInstance(Context context){
+		
+		if(sInstance != null && sInstance.mDb != null){
 			return sInstance;
 		}
-
+		
 		sInstance = new UserDb(context);
-		if (sInstance.open(context) == false) {
+		if( sInstance.open(context) == false){
 			sInstance = null;
 		}
-
+		
 		return sInstance;
 	}
-
-	private boolean open(Context context) {
+	
+	private boolean open(Context context){
 
 		CookDataHelper dbHelper;
 		dbHelper = new CookDataHelper(context);
-
-		try {
+		
+		// °£ÇæÀûÀ¸·Î ¹ß»ýÇÏ´Â ºñÁ¤»ó Á¾·á ¹®Á¦ ¶§¹®¿¡ ¾Æ·¡¿Í °°ÀÌ Á¶Ä¡ÇÑ´Ù.
+		try{
 			mDb = dbHelper.getWritableDatabase();
-			if (mDb == null)
+			if(mDb == null)
 				mDb = dbHelper.getWritableDatabase();
-
-		} catch (Exception e) {
-
-			File dbDir = new File(mContext.getApplicationInfo().dataDir
-					+ "/databases");
+			
+		}catch(Exception e){
+			
+			File dbDir = new File(mContext.getApplicationInfo().dataDir+"/databases");
 			dbDir.mkdirs();
-
+			
 			mDb = dbHelper.getWritableDatabase();
 		}
-
+		
 		return (mDb == null) ? false : true;
 	}
-
+	
 	/**
-	 * ëª¨ë“  ì¦ê²¨ì°¾ê¸°ëœ ë…¸ì„  ê°€ì ¸ì˜¤ê¸°
-	 * 
+	 * ¸ðµç Áñ°ÜÃ£±âµÈ ³ë¼± °¡Á®¿À±â
 	 * @return
 	 */
-	public Cursor selectFavoriteNosun() {
-		String slq = "select * from Favorite";
+	public Cursor selectFavoriteNosun(){
+		String slq = "select * from Favorite" + " ORDER BY " + UserData.ORDERING + " ASC;";
 		return mDb.rawQuery(slq, null);
 	}
-
+	
 	/**
-	 * íŠ¹ì • ì¦ê²¨ì°¾ê¸°ëœ ë…¸ì„  ì‚­ì œ
-	 * 
+	 * Æ¯Á¤ Áñ°ÜÃ£±âµÈ ³ë¼± »èÁ¦
 	 * @param id
 	 * @return
 	 */
-	public boolean deleteFavoriteNosun(int id) {
+	public boolean deleteFavoriteNosun(int id){
 		String slq = "delete from Favorite where _id = " + id;
-
-		try {
+		
+		try{
 			mDb.execSQL(slq);
 			return true;
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			return false;
 		}
 	}
-
+	
 	/**
-	 * ëª¨ë“  ë²„ìŠ¤ì •ë¥˜ì†Œ ê°€ì ¸ì˜¤ê¸°
-	 * 
+	 * ¸ðµç ¹ö½ºÁ¤·ù¼Ò °¡Á®¿À±â
 	 * @return
 	 */
-	public Cursor selectFavoriteBusStop() {
-		String slq = "select * from Favorite2";
+	public Cursor selectFavoriteBusStop(){
+		String slq = "select * from Favorite2" + " ORDER BY " + UserData.ORDERING + " ASC;";
 		return mDb.rawQuery(slq, null);
 	}
-
+	
 	/**
-	 * íŠ¹ì • ì¦ê²¨ì°¾ê¸°ëœ ë²„ìŠ¤ì •ë¥˜ì†Œ ì‚­ì œ
-	 * 
+	 * Æ¯Á¤ Áñ°ÜÃ£±âµÈ ¹ö½ºÁ¤·ù¼Ò »èÁ¦
 	 * @param id
 	 * @return
 	 */
-	public boolean deleteFavoriteBusStop(int id) {
+	public boolean deleteFavoriteBusStop(int id){
 		String slq = "delete from Favorite2 where _id = " + id;
-
-		try {
+		
+		try{
 			mDb.execSQL(slq);
 			return true;
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			return false;
 		}
 	}
-
+	
 	/**
-	 * íŠ¹ì • ì¦ê²¨ì°¾ê¸°ëœ ë²„ìŠ¤ì •ë¥˜ì†Œ ì‚­ì œ
-	 * 
+	 * Áñ°ÜÃ£±â
 	 * @param id
 	 * @return
 	 */
-	public boolean insertFavorite(String nosun, String stopId, String stopName,
-			String upDown, String realtime, String ord) {
-		String slq = "insert into Favorite(NOSUN, STOPID, STOPNAME, UPDOWN, REALTIME ,ORD) values('"
-				+ nosun
-				+ "', '"
-				+ stopId
-				+ "', '"
-				+ stopName
-				+ "', '"
-				+ upDown
-				+ "', '" + realtime + "', '" + ord + "');";
-
-		try {
+	public boolean insertFavorite(String nosun, String stopId, String stopName, 
+									String upDown, String realtime, String ord){
+		
+		String slq = "insert into Favorite(NOSUN, STOPID, STOPNAME, UPDOWN, REALTIME ,ORD) values('" + 
+										nosun + "', '" + 
+										stopId + "', '" + 
+										stopName + "', '" + 
+										upDown + "', '" + 
+										realtime + "', '" + 
+										ord + "');";
+				
+		try{
 			mDb.execSQL(slq);
 			return true;
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			return false;
 		}
 	}
-
+	
 	/**
-	 * íŠ¹ì • ì¦ê²¨ì°¾ê¸°ëœ ë²„ìŠ¤ì •ë¥˜ì†Œ ì‚­ì œ
-	 * 
+	 * Æ¯Á¤ Áñ°ÜÃ£±âµÈ ¹ö½ºÁ¤·ù¼Ò »èÁ¦
 	 * @param id
 	 * @return
 	 */
-	public boolean deleteFavorite(String nosun, String stopId) {
-
-		String slq = "delete from Favorite where NOSUN = '" + nosun
-				+ "' and STOPID = '" + stopId + "'";
-
-		try {
+	public boolean deleteFavorite(String nosun, String stopId){
+		
+		String slq = "delete from Favorite where NOSUN = '" + nosun + "' and STOPID = '" + stopId +"'";
+				
+		try{
 			mDb.execSQL(slq);
 			return true;
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			return false;
 		}
 	}
-
+	
+	
 	/**
-	 * íŠ¹ì • ì¦ê²¨ì°¾ê¸°ëœ ê²ƒ ìžˆëŠ”ì§€ ì—¬ë¶€
-	 * 
+	 * Æ¯Á¤ Áñ°ÜÃ£±âµÈ °Í ÀÖ´ÂÁö ¿©ºÎ
 	 * @param id
 	 * @return
 	 */
-	public boolean isRegisterFavorite(String nosun, String stopId) {
-		String slq = "select * from Favorite where " + "NOSUN = '" + nosun
-				+ "' and " + "STOPID = '" + stopId + "'";
-
+	public boolean isRegisterFavorite(String nosun, String stopId){
+		String slq = "select * from Favorite where " +
+						"NOSUN = '" + nosun +"' and " +
+						"STOPID = '" + stopId +"'";
+		
 		Cursor cursor = mDb.rawQuery(slq, null);
 		int count = cursor.getCount();
 		cursor.close();
-
-		if (count > 0) {
+		
+		if(count > 0){
 			return true;
 		}
-
+	
 		return false;
-
+		
 	}
-
+	
+	
 	/**
-	 * ì¶”ê°€
-	 * 
+	 * Ãß°¡
 	 * @param id
 	 * @return
 	 */
-	public boolean insertFavorite2(String stopName, String stopId) {
-		String slq = "insert into Favorite2(NOSUNNAME, NOSUNNO) values('"
-				+ stopName + "', '" + stopId + "');";
-
-		try {
+	public boolean insertFavorite2(String stopName, String stopId){
+		
+		Log.d("aa", "insertFavorite2 - stopName:" + stopName + ", stopId: "+stopId);
+		
+		String slq = "insert into Favorite2(NOSUNNAME, NOSUNNO) values('" + 
+						stopName + "', '" + 
+						stopId + "');";
+				
+		try{
 			mDb.execSQL(slq);
 			return true;
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			return false;
 		}
 	}
-
+	
 	/**
-	 * ì‚­ì œ
-	 * 
+	 * »èÁ¦
 	 * @param id
 	 * @return
 	 */
-	public boolean deleteFavorite2(String stopId) {
-
-		String slq = "delete from Favorite2 where NOSUNNO = '" + stopId + "'";
-
-		try {
+	public boolean deleteFavorite2(String stopId){
+		
+		String slq = "delete from Favorite2 where NOSUNNO = '" + stopId +"'";
+				
+		try{
 			mDb.execSQL(slq);
 			return true;
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			return false;
 		}
 	}
-
+	
+	
 	/**
-	 * íŠ¹ì • ì¦ê²¨ì°¾ê¸°ëœ ê²ƒ ìžˆëŠ”ì§€ ì—¬ë¶€
-	 * 
+	 * Æ¯Á¤ Áñ°ÜÃ£±âµÈ °Í ÀÖ´ÂÁö ¿©ºÎ
 	 * @param id
 	 * @return
 	 */
-	public boolean isRegisterFavorite2(String stopId) {
-		String slq = "select * from Favorite2 where " + "NOSUNNO = '" + stopId
-				+ "'";
-
+	public boolean isRegisterFavorite2(String stopId){
+		String slq = "select * from Favorite2 where " +
+						"NOSUNNO = '" + stopId +"'";
+		
 		Cursor cursor = mDb.rawQuery(slq, null);
 		int count = cursor.getCount();
 		cursor.close();
-
-		if (count > 0) {
+		
+		if(count > 0){
 			return true;
 		}
-
+	
 		return false;
-
+		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
+	/** ORDER_NUMÀÇ ÃÖ´ë°ªÀ» ±¸ÇÑ´Ù.
+	 * @return ÃÖ´ë°ª
+	 */
+	public int getMaxOrderNum(String table){
+		int maxOrderNum = 0;
+		
+		String slq = "SELECT MAX("+ UserData.ORDERING +")"
+					+ " FROM " + table + ";";
+		
+		Cursor cursor = mDb.rawQuery(slq, null);
+		if(cursor.moveToFirst()){
+			maxOrderNum = cursor.getInt(0);
+		}
+		cursor.close();
+		
+		return maxOrderNum;
+	}
+	
+	/**
+	 * order_num º¯°æ
+	 */
+	public int updateOrderNum(String table, int _id, int orderNum){
+		ContentValues values = new ContentValues();
+		values.put(UserData.ORDERING, orderNum);
+		
+		return mDb.update(table, values, UserData._ID + " = ? ", new String[]{String.valueOf(_id)});
+	}
+	
+	public void updateBySql(String table, String value, String selection){
+		
+		String sql = "UPDATE "+ table
+					+" SET "+ value;
+		if(selection != null)
+			sql += " WHERE " + selection;
+		
+		mDb.execSQL(sql);		
+	}
+	
+	
+	
+	
+	
+	
+	
 }

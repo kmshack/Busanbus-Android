@@ -7,77 +7,96 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 
+
 /**
- *  scheme  
- * 
- * ÌäπÏ†ï ÎÖ∏ÏÑ†Ïùò Ï†ïÎ•òÏÜå *
+ * ∆Ø¡§ ≥Îº±¿« ¡§∑˘º“ *
  * busanbus://line/detail?nosun=xxxxx&uniqueid=xxxxx&ord=xxxxx&busstopname=xxxxx&updown=xxxxx
  * 
- * Ï†ïÎ•òÏÜå * 
+ * ¡§∑˘º“ *
  * busanbus://stop/detail?busstop=xxxxx
  * 
- * Ìôà * 
+ * »® *
  * busanbus://home
  * 
  * @author KMSHACK
- * 
+ *
  */
 
 public class GateActivity extends BaseActivity {
 
-	private String mStrageDir = Environment.getExternalStorageDirectory()
-			.getPath();
-	private File mBusDataFile = new File(mStrageDir
-			+ "/Android/data/com.kmshack.BusanBus/databases/BusData.kms");
-
+	String mStrageDir = Environment.getExternalStorageDirectory().getPath();
+	File mBusDataFile = new File(mStrageDir + "/Android/data/com.kmshack.BusanBus/databases/BusData.kms");
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		if (!mBusDataFile.exists()) {
+		
+		
+		if(!mBusDataFile.exists()){
 			Intent i = new Intent(this, BusanBusActivity.class);
 			startActivity(i);
 		}
-
-		Intent intent = getIntent();
-
-		if (Intent.ACTION_VIEW.equals(intent.getAction())) {
-			Uri uri = intent.getData();
-			String scheme = uri.getScheme();
-			String host = uri.getHost();
-			String path = uri.getPath();
-			if (scheme.equals("busanbus")) {
-
-				if (host.equals("line")) { // ÌäπÏ†ï ÎÖ∏ÏÑ†Ïùò Ï†ïÎ•òÏÜå
-
-					if (path.equals("/detail")) {
-						Intent i = new Intent(this, BusArriveActivity.class);
-						i.putExtra("NOSUN", uri.getQueryParameter("nosun"));
-						i.putExtra("UNIQUEID",
-								uri.getQueryParameter("uniqueid"));
-						i.putExtra("ORD", uri.getQueryParameter("ord"));
-						i.putExtra("BUSSTOPNAME",
-								uri.getQueryParameter("busstopname"));
-						i.putExtra("UPDOWN", uri.getQueryParameter("updown"));
-						i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-						startActivity(i);
-					}
-				} else if (host.equals("stop")) { // Ï†ïÎ•òÏÜå
-					if (path.equals("/detail")) {
+		
+	     Intent intent = getIntent(); 
+	     
+	     if(Intent.ACTION_VIEW.equals(intent.getAction())) { 
+	         Uri uri = intent.getData();
+	         String scheme = uri.getScheme();
+	         String host = uri.getHost();
+	         String path = uri.getPath();
+	         if(scheme.equals("busanbus")){
+	        	 
+	        	 tracker.trackPageView("/NosunDetail"); 
+	        	 
+	        	 if(host.equals("line")){ //∆Ø¡§ ≥Îº±¿« ¡§∑˘º“
+	        		 
+	        		 if(path.equals("/detail")){
+							Intent i = new Intent(this, BusArriveActivity.class);
+							i.putExtra("NOSUN", uri.getQueryParameter("nosun"));
+							i.putExtra("UNIQUEID", uri.getQueryParameter("uniqueid"));
+							i.putExtra("ORD", uri.getQueryParameter("ord"));
+							i.putExtra("BUSSTOPNAME", uri.getQueryParameter("busstopname"));
+							i.putExtra("UPDOWN", uri.getQueryParameter("updown"));
+							i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							startActivity(i);
+							
+							tracker.trackEvent(			 
+									"Gate",  // Category			 
+									"Line",  // Action			 
+									"≥Îº± ¡§∑˘º“", // Label			 
+									0);	   // Value 
+	        		 }
+	        	 }
+	        	 else if(host.equals("stop")){ //¡§∑˘º“
+	        		 if(path.equals("/detail")){
 						Intent i = new Intent(this, BusstopDetailActivity.class);
 						i.putExtra("BusStop", uri.getQueryParameter("busstop"));
-						i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+						i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						startActivity(i);
-					}
-				} else if (host.equals("home")) { // Ìôà
-					Intent i = new Intent(this, BusanBusActivity.class);
-					i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-					startActivity(i);
-				}
-			}
-
-		}
-
-		finish();
+						
+						tracker.trackEvent(			 
+								"Gate",  // Category			 
+								"Stop",  // Action			 
+								"¡§∑˘º“", // Label			 
+								0);	   // Value 
+	        		 }
+	        	 }
+	        	 else if(host.equals("home")){ // »®
+	        		 Intent i = new Intent(this, BusanBusActivity.class);
+	        		 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        		 startActivity(i);
+	        		 
+	        		 tracker.trackEvent(			 
+								"Gate",  // Category			 
+								"Home",  // Action			 
+								"»®", // Label			 
+								0);	   // Value 
+	        	 }
+	         }
+	         
+	     }
+	     
+	     
+	     finish();
 	}
 }

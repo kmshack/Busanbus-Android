@@ -2,115 +2,127 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:orientation="vertical" >
-
-	<ScrollView
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent" >
-
-		<LinearLayout
-			android:layout_width="fill_parent"
-			android:layout_height="fill_parent"
-			android:orientation="vertical" >
-
-			<LinearLayout
-				android:id="@+id/setting_arrive_sun"
-				android:layout_width="fill_parent"
+	android:orientation="vertical">
+	
+	<ScrollView 
+	    android:layout_height="fill_parent"
+	    android:layout_width="fill_parent">
+	    	<LinearLayout         
+		    android:layout_height="fill_parent"
+	        android:layout_width="fill_parent"
+	        android:orientation="vertical">
+	        
+	    	<LinearLayout
+	    	    android:id="@+id/setting_arrive_sun"
+		    	android:layout_width="fill_parent"
 				android:layout_height="56dip"
-				android:background="@drawable/list_selector"
-				android:gravity="center_vertical"
-				android:paddingLeft="12dip"
-				android:paddingRight="12dip" >
-
-				<TextView
-					android:layout_width="fill_parent"
+			    android:background="@drawable/list_selector"
+                android:paddingLeft="12dip"
+                android:paddingRight="12dip"
+				android:gravity="center_vertical">
+				
+	    	    <TextView
+			    	android:layout_width="fill_parent"
 					android:layout_height="56dip"
 					android:layout_weight="1"
-					android:clickable="false"
 					android:gravity="center_vertical"
 					android:text="보통"
-					android:textSize="14sp" />
-
-				<ImageView
-					android:id="@+id/setting_check_arrive_sun"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:clickable="false" />
+					android:clickable="false"
+					android:textSize="14sp"/>
+					
+	    	    <ImageView 
+	    	        android:id="@+id/setting_check_arrive_sun"
+			  		android:layout_width="wrap_content"
+			  		android:clickable="false"
+				    android:layout_height="wrap_content"/>
+	    	    
 			</LinearLayout>
-
-			<ImageView
-				android:layout_width="fill_parent"
-				android:layout_height="1px"
-				android:background="#D2D2C8" />
-
-			<LinearLayout
-				android:id="@+id/setting_favorite_start"
-				android:layout_width="fill_parent"
+			
+	    	<ImageView 
+		  		android:layout_width="fill_parent"
+			    android:layout_height="1px"
+				android:background="#D2D2C8"/>
+	    		    	
+	    	<LinearLayout
+	    	    android:id="@+id/setting_favorite_start"
+		    	android:layout_width="fill_parent"
 				android:layout_height="56dip"
-				android:background="@drawable/list_selector"
-				android:gravity="center_vertical"
-				android:paddingLeft="12dip"
-				android:paddingRight="12dip" >
-
-				<TextView
-					android:layout_width="fill_parent"
+                android:background="@drawable/list_selector"
+                android:paddingLeft="12dip"
+                android:paddingRight="12dip"
+                android:gravity="center_vertical">
+				
+	    	    <TextView
+			    	android:layout_width="fill_parent"
 					android:layout_height="56dip"
 					android:layout_weight="1"
 					android:clickable="false"
 					android:gravity="center_vertical"
 					android:text="크게"
-					android:textSize="16sp" />
-
-				<ImageView
-					android:id="@+id/setting_check_favorite_start"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:clickable="false" />
+					android:textSize="16sp"/>
+					
+	    	    <ImageView 
+	    	        android:id="@+id/setting_check_favorite_start"
+			  		android:layout_width="wrap_content"
+			  		android:clickable="false"
+				    android:layout_height="wrap_content"/>
+	    	    
 			</LinearLayout>
-
-			<ImageView
-				android:layout_width="fill_parent"
-				android:layout_height="1px"
-				android:background="#D2D2C8" />
-
-			<LinearLayout
-				android:id="@+id/setting_favorite_location"
-				android:layout_width="fill_parent"
+			
+	    	
+	    	<ImageView 
+		  		android:layout_width="fill_parent"
+			    android:layout_height="1px"
+				android:background="#D2D2C8"/>
+	    	
+	    	<LinearLayout
+	    	    android:id="@+id/setting_favorite_location"
+		    	android:layout_width="fill_parent"
 				android:layout_height="56dip"
-				android:background="@drawable/list_selector"
-				android:gravity="center_vertical"
-				android:paddingLeft="12dip"
-				android:paddingRight="12dip" >
-
-				<TextView
-					android:layout_width="fill_parent"
+                android:background="@drawable/list_selector"
+                android:paddingLeft="12dip"
+                android:paddingRight="12dip"
+                android:gravity="center_vertical">
+				
+	    	    <TextView
+			    	android:layout_width="fill_parent"
 					android:layout_height="56dip"
 					android:layout_weight="1"
 					android:clickable="false"
 					android:gravity="center_vertical"
 					android:text="아주크게"
-					android:textSize="18sp" />
-
-				<ImageView
-					android:id="@+id/setting_check_favorite_location"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:clickable="false" />
+					android:textSize="18sp"/>
+					
+	    	    <ImageView 
+	    	        android:id="@+id/setting_check_favorite_location"
+			  		android:layout_width="wrap_content"
+			  		android:clickable="false"
+				    android:layout_height="wrap_content"/>
+	    	    
 			</LinearLayout>
+			
+	    	
+	    	<ImageView 
+		  		android:layout_width="fill_parent"
+			    android:layout_height="1px"
+				android:background="#D2D2C8"/>
+	    	
+	    
+	    	
+	    	<TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:padding="5dip"
+                android:layout_margin="10dip"
+                android:text="*접근성 향상을 위한 기능으로 주요 정보의 글자크기를 설정 합니다. 설정 후 앱 재시작시 적용됩니다."
+                />
+    
 
-			<ImageView
-				android:layout_width="fill_parent"
-				android:layout_height="1px"
-				android:background="#D2D2C8" />
-
-			<TextView
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:layout_margin="10dip"
-				android:padding="5dip"
-				android:text="*접근성 향상을 위한 기능으로 주요 정보의 글자크기를 설정 합니다. 설정 후 앱 재시작시 적용됩니다."
-				android:textSize="13sp" />
-		</LinearLayout>
+            
+            </LinearLayout>
+            
 	</ScrollView>
-
+	
+	
 </LinearLayout>

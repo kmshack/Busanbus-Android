@@ -3,23 +3,18 @@ package com.kmshack.BusanBus.database;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Environment;
+import android.util.Log;
 
-/**
- * Î≤ÑÏä§ DB
- * @author kmshack
- *
- */
+import com.kmshack.BusanBus.utils.Utils;
+
 public class BusDb {
 
-	private static final String DATABASE_PATH = Environment
-			.getExternalStorageDirectory().getPath()
-			+ "/Android/data/com.kmshack.BusanBus/databases/BusData.kms";
-
 	private static BusDb sInstance;
+	private Context mContext;
 	private SQLiteDatabase mDb;
 
 	private BusDb(Context context) {
+		mContext = context;
 	}
 
 	public synchronized static BusDb getInstance(Context context) {
@@ -50,22 +45,20 @@ public class BusDb {
 	}
 
 	private void openDb() {
-		mDb = SQLiteDatabase.openDatabase(DATABASE_PATH, null,
-				SQLiteDatabase.CREATE_IF_NECESSARY);
+		mDb = SQLiteDatabase.openDatabase(Utils.getDbFile(mContext).getPath(), null, SQLiteDatabase.CREATE_IF_NECESSARY);
 	}
 
 	public Cursor selectNosunForQuery(String query) {
 		String slq = "";
 
-		// Î™®Îì† ÎÖ∏ÏÑ†
+		// ∏µÁ ≥Îº±
 		if (query.length() <= 0 || query.equals("")) {
-			slq = "select _id, NOSUNNUM, START, END from BUSLINEINFO order by NOSUNNUM COLLATE LOCALIZED ASC";
+			slq = "select _id, NOSUNNUM, START, END, WEBREALTIME from BUSLINEINFO order by NOSUNNUM COLLATE LOCALIZED ASC";
 		}
 
-		// ÌäπÏ†ï ÎÖ∏ÏÑ†
+		// ∆Ø¡§ ≥Îº±
 		else {
-			slq = "select _id, NOSUNNUM, START, END from BUSLINEINFO where NOSUNNUM  like '%"
-					+ query + "%' order by NOSUNNUM COLLATE LOCALIZED ASC";
+			slq = "select _id, NOSUNNUM, START, END, WEBREALTIME from BUSLINEINFO where NOSUNNUM  like '%" + query + "%' order by NOSUNNUM COLLATE LOCALIZED ASC";
 		}
 		return mDb.rawQuery(slq, null);
 
@@ -78,18 +71,14 @@ public class BusDb {
 
 		String slq = "";
 
-		// Ï†ïÎ•òÏÜåÎ≤àÌò∏ Í≤ÄÏÉâ
-		if (query.subSequence(0, 1).toString().equals("0")
-				|| query.subSequence(0, 1).toString().equals("1")
-				|| query.subSequence(0, 1).toString().equals("5")) {
-			slq = "select _id, BUSSTOPNAME, UNIQUEID from BUSLINE where UNIQUEID  like '"
-					+ query + "%' group by UNIQUEID";
+		// ¡§∑˘º“π¯»£ ∞Àªˆ
+		if (query.subSequence(0, 1).toString().equals("0") || query.subSequence(0, 1).toString().equals("1") || query.subSequence(0, 1).toString().equals("5")) {
+			slq = "select _id, BUSSTOPNAME, UNIQUEID from BUSLINE where UNIQUEID  like '" + query + "%' group by UNIQUEID";
 		}
 
-		// Ï†ïÎ•òÏÜåÎ™Ö Í≤ÄÏÉâ
+		// ¡§∑˘º“∏Ì ∞Àªˆ
 		else {
-			slq = "select _id, BUSSTOPNAME, UNIQUEID from BUSLINE where BUSSTOPNAME  like '"
-					+ query + "%' group by UNIQUEID";
+			slq = "select _id, BUSSTOPNAME, UNIQUEID from BUSLINE where BUSSTOPNAME  like '" + query + "%' group by UNIQUEID";
 		}
 
 		return mDb.rawQuery(slq, null);
@@ -97,7 +86,7 @@ public class BusDb {
 	}
 
 	/**
-	 * ÌäπÏ†ï ÎÖ∏ÏÑ† Ï†ïÎ≥¥ Í∞ÄÏ†∏ Ïò§Í∏∞
+	 * ∆Ø¡§ ≥Îº± ¡§∫∏ ∞°¡Æ ø¿±‚
 	 * 
 	 * @param nosun
 	 * @return
@@ -111,21 +100,41 @@ public class BusDb {
 	}
 
 	/**
-	 * ÌäπÏ†ï ÎÖ∏ÏÑ† Ï†ïÎ≥¥ Í∞ÄÏ†∏ Ïò§Í∏∞
+	 * ∆Ø¡§ ≥Îº± ¡§∫∏ ∞°¡Æ ø¿±‚
 	 * 
 	 * @param nosun
 	 * @return
 	 */
-	public Cursor selectBusline(String nosun) {
+	public Cursor selectLocation(double latutude, double longitude) {
 
-		String slq = "select _id from BUSLINE where BUSLINENUM='" + nosun + "'";
+		double longitudePlus = longitude + 0.01F;
+		double longitudeMinus = longitude - 0.01F;
+
+		double latutudePlus = latutude + 0.01F;
+		double latutudeMinus = latutude - 0.01F;
+
+		String slq = "select * from BUSLINE where X < " + longitudePlus + " and X > " + longitudeMinus + " and Y < " + latutudePlus + " and Y > " + latutudeMinus;
 
 		return mDb.rawQuery(slq, null);
 
 	}
 
 	/**
-	 * ÌäπÏ†ï ÎÖ∏ÏÑ† Ï†ïÎ≥¥ Í∞ÄÏ†∏ Ïò§Í∏∞
+	 * ∆Ø¡§ ≥Îº± ¡§∫∏ ∞°¡Æ ø¿±‚
+	 * 
+	 * @param nosun
+	 * @return
+	 */
+	public Cursor selectBusline(String nosun) {
+
+		String slq = "select * from BUSLINE where BUSLINENUM='" + nosun + "'";
+
+		return mDb.rawQuery(slq, null);
+
+	}
+
+	/**
+	 * ∆Ø¡§ ≥Îº± ¡§∫∏ ∞°¡Æ ø¿±‚
 	 * 
 	 * @param nosun
 	 * @return
@@ -133,13 +142,12 @@ public class BusDb {
 	public Cursor selectBuslineForUniqueid(String uniqueid) {
 
 		String slq = "select * from BUSLINE where UNIQUEID ='" + uniqueid + "'";
-
 		return mDb.rawQuery(slq, null);
 
 	}
 
 	/**
-	 * ÌäπÏ†ï ÎÖ∏ÏÑ† ÏÉÅÌñâÏÑ† Í∞ÄÏ†∏ Ïò§Í∏∞
+	 * ∆Ø¡§ ≥Îº± ªÛ«‡º± ∞°¡Æ ø¿±‚
 	 * 
 	 * @param nosun
 	 * @return
@@ -150,15 +158,14 @@ public class BusDb {
 		int count = cursor.getCount();
 		cursor.close();
 
-		String slq = "select _id, UNIQUEID, ORD, BUSSTOPNAME, SIGUNNAME, GUNAME, DONGNAME from BUSLINE where BUSLINENUM ='"
-				+ nosun + "' and ORD <=" + ((count / 2) + 5);
+		String slq = "select _id, UNIQUEID, ORD, BUSSTOPNAME, SIGUNNAME, GUNAME, DONGNAME from BUSLINE where BUSLINENUM ='" + nosun + "' and ORD <=" + ((count / 2) + 5);
 
 		return mDb.rawQuery(slq, null);
 
 	}
 
 	/**
-	 * ÌäπÏ†ï ÎÖ∏ÏÑ† ÌïòÌñâÏÑ† Í∞ÄÏ†∏ Ïò§Í∏∞
+	 * ∆Ø¡§ ≥Îº± «œ«‡º± ∞°¡Æ ø¿±‚
 	 * 
 	 * @param nosun
 	 * @return
@@ -169,22 +176,21 @@ public class BusDb {
 		int count = cursor.getCount();
 		cursor.close();
 
-		String slq = "select _id, UNIQUEID, ORD, BUSSTOPNAME, SIGUNNAME, GUNAME, DONGNAME from BUSLINE where BUSLINENUM ='"
-				+ nosun + "' and ORD >=" + ((count / 2) - 5);
+		String slq = "select _id, UNIQUEID, ORD, BUSSTOPNAME, SIGUNNAME, GUNAME, DONGNAME from BUSLINE where BUSLINENUM ='" + nosun + "' and ORD >=" + ((count / 2) - 5);
 
 		return mDb.rawQuery(slq, null);
 
 	}
 
 	/**
-	 * Ï†ïÎ•òÏÜåÎ≤àÌò∏->Ï†ïÎ•òÏÜå Ïù¥Î¶Ñ
+	 * ¡§∑˘º“π¯»£->¡§∑˘º“ ¿Ã∏ß
 	 * 
 	 * @param nosun
 	 * @return
 	 */
 	public String selectStopIdToName(String stopid) {
 
-		String slq = "select " + "BUSSTOPNAME " + // Ï¢ÖÏ†ê 7
+		String slq = "select " + "BUSSTOPNAME " + // ¡æ¡° 7
 				"from BUSLINE where UNIQUEID ='" + stopid + "';";
 
 		Cursor cursor = mDb.rawQuery(slq, null);
@@ -201,33 +207,24 @@ public class BusDb {
 	}
 
 	/**
-	 * ÌäπÏ†ï ÎÖ∏ÏÑ† ÌïòÌñâÏÑ† Í∞ÄÏ†∏ Ïò§Í∏∞
+	 * ∆Ø¡§ ≥Îº± «œ«‡º± ∞°¡Æ ø¿±‚
 	 * 
 	 * @param nosun
 	 * @return
 	 */
 	public Cursor selectReatime(String stopid, String nosun, String ord) {
 
-		String slq = "select "
-				+ "BUSLINEINFO.BUSLINEID, "
-				+ // Î≤ÑÏä§Î≤àÌò∏ ÏïÑÏù¥Îîî 0
-				"BUSLINE.REALTIME, "
-				+ // Ïã§ÏãúÍ∞Ñ ÎèÑÏ∞©Ï†ïÎ≥¥ 1
-				"BUSLINE.BUSLINENUM, "
-				+ // ÎÖ∏ÏÑ†Î≤àÌò∏ 2
-				"BUSLINEINFO.START, "
-				+ // ÏãúÏûë 3
-				"BUSLINEINFO.MIDD, "
-				+ // Ï§ëÍ∞Ñ 4
-				"BUSLINEINFO.END, "
-				+ // Ï¢ÖÏ†ê 5
-				"BUSLINE.X, "
-				+ // Ï¢ÖÏ†ê 6
-				"BUSLINE.Y "
-				+ // Ï¢ÖÏ†ê 7
-				"from BUSLINE, BUSLINEINFO where BUSLINEINFO.NOSUNNUM=BUSLINE.BUSLINENUM and BUSLINE.UNIQUEID ='"
-				+ stopid + "' and BUSLINE.BUSLINENUM ='" + nosun
-				+ "' and BUSLINE.ORD =" + ord;
+		String slq = "select " + "BUSLINEINFO.BUSLINEID, " + // πˆΩ∫π¯»£ æ∆¿Ãµ 0
+				"BUSLINE.REALTIME, " + // Ω«Ω√∞£ µµ¬¯¡§∫∏ 1
+				"BUSLINE.BUSLINENUM, " + // ≥Îº±π¯»£ 2
+				"BUSLINEINFO.START, " + // Ω√¿€ 3
+				"BUSLINEINFO.MIDD, " + // ¡ﬂ∞£ 4
+				"BUSLINEINFO.END, " + // ¡æ¡° 5
+				"BUSLINE.X, " + // ¡æ¡° 6
+				"BUSLINE.Y, " + // ¡æ¡° 7
+				"BUSLINE.BUSSTOPNAME, " + // ¡æ¡° 8
+				"BUSLINE.UNIQUEID " + // ¡æ¡° 9
+				"from BUSLINE, BUSLINEINFO where BUSLINEINFO.NOSUNNUM=BUSLINE.BUSLINENUM and BUSLINE.UNIQUEID ='" + stopid + "' and BUSLINE.BUSLINENUM ='" + nosun + "' and BUSLINE.ORD =" + ord;
 
 		return mDb.rawQuery(slq, null);
 
@@ -235,23 +232,46 @@ public class BusDb {
 
 	public Cursor selectReatime(String busstop) {
 
-		String slq = "select "
-				+ "BUSLINEINFO.BUSLINEID, "
-				+ // Î≤ÑÏä§Î≤àÌò∏ ÏïÑÏù¥Îîî 0
-				"BUSLINE.REALTIME, "
-				+ // Ïã§ÏãúÍ∞Ñ ÎèÑÏ∞©Ï†ïÎ≥¥ 1
-				"BUSLINE.BUSLINENUM, "
-				+ // ÎÖ∏ÏÑ†Î≤àÌò∏ 2
-				"BUSLINEINFO.START, "
-				+ // ÏãúÏûë 3
-				"BUSLINEINFO.MIDD, "
-				+ // Ï§ëÍ∞Ñ 4
-				"BUSLINEINFO.END "
-				+ // Ï¢ÖÏ†ê 5
-				"from BUSLINE, BUSLINEINFO where BUSLINEINFO.NOSUNNUM=BUSLINE.BUSLINENUM and BUSLINE.UNIQUEID ='"
-				+ busstop + "'";
+		String slq = "select " + "BUSLINEINFO.BUSLINEID, " + // πˆΩ∫π¯»£ æ∆¿Ãµ 0
+				"BUSLINE.REALTIME, " + // Ω«Ω√∞£ µµ¬¯¡§∫∏ 1
+				"BUSLINE.BUSLINENUM, " + // ≥Îº±π¯»£ 2
+				"BUSLINEINFO.START, " + // Ω√¿€ 3
+				"BUSLINEINFO.MIDD, " + // ¡ﬂ∞£ 4
+				"BUSLINEINFO.END, " + // ¡æ¡° 5
+				"BUSLINE.ORD " + // ORD 6
+				"from BUSLINE, BUSLINEINFO where BUSLINEINFO.NOSUNNUM=BUSLINE.BUSLINENUM and BUSLINE.UNIQUEID ='" + busstop + "'";
 
 		return mDb.rawQuery(slq, null);
+
+	}
+
+	/**
+	 * ∆Ø¡§ ≥Îº± ¡§∫∏ ∞°¡Æ ø¿±‚
+	 * 
+	 * @param nosun
+	 * @return
+	 */
+	public String selectNextStop(String lineNumber, int ord) {
+
+		// next stop
+		ord++;
+
+		Log.d("aa", "lineNumber:" + lineNumber + ", ord:" + ord);
+
+		String slq = "select BUSSTOPNAME, UNIQUEID from BUSLINE where BUSLINENUM ='" + lineNumber + "' and ORD = " + ord;
+		Cursor cursor = mDb.rawQuery(slq, null);
+
+		String returnString = "¥Ÿ¿Ω ¡§∑˘º“: æ¯¿Ω.";
+
+		if (cursor.moveToFirst()) {
+			final String name = cursor.getString(0);
+			final String id = cursor.getString(1);
+			returnString = "¥Ÿ¿Ω ¡§∑˘º“: " + name + "(" + id + ")";
+		}
+
+		cursor.close();
+
+		return returnString;
 
 	}
 

@@ -15,75 +15,74 @@ import android.widget.ProgressBar;
 
 import com.kmshack.BusanBus.R;
 
-/**
- * ê³µì§€ ì‚¬í•­
- * @author kmshack
- *
- */
 public class WebActivity extends BaseActivity {
 
-	private WebView mWebView;
-	private ProgressBar mProgress;
-
+	WebView webview;
+	ProgressBar progress;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.webview);
-
-		setTitleLeft("ê³µì§€ì‚¬í•­");
-
-		mWebView = (WebView) findViewById(R.id.webview);
-		mWebView.scrollTo(0, 170);
-		mWebView.loadUrl("http://kmshack.tistory.com/m/post/list?categoryId=416088");
-		mProgress = (ProgressBar) findViewById(R.id.progress);
-		mWebView.getSettings().setJavaScriptEnabled(true);
-		mWebView.setWebChromeClient(new WebChromeClient() {
-
+		
+		tracker.trackPageView("/Notice"); 
+		
+		setTitle("°øÁö»çÇ×");
+		
+		webview = (WebView)findViewById(R.id.webview);
+		webview.loadUrl("http://busanbus.tistory.com/m/post/list");
+		progress = (ProgressBar)findViewById(R.id.progress);
+		webview.getSettings().setJavaScriptEnabled(true);
+		webview.setWebChromeClient(new WebChromeClient(){
+			
 			@Override
 			public void onProgressChanged(WebView view, int newProgress) {
-				if (newProgress >= 100) {
-					mProgress.setVisibility(View.GONE);
-					mWebView.setVisibility(View.VISIBLE);
-					mWebView.scrollTo(0, 170);
-				} else {
-					mWebView.setVisibility(View.INVISIBLE);
-					mProgress.setVisibility(View.VISIBLE);
-				}
-
-			}
-		});
-		mWebView.setWebViewClient(new EventWebViewClient());
-
+			  if(newProgress >= 100){
+				  progress.setVisibility(View.GONE);
+				  webview.setVisibility(View.VISIBLE);
+			  }
+			  else{
+				  webview.setVisibility(View.INVISIBLE);
+				  progress.setVisibility(View.VISIBLE);
+			  }
+			  
+		}});
+		webview.setWebViewClient(new EventWebViewClient());
+		
 	}
-
+	
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
-			mWebView.goBack();
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
+	    if ((keyCode == KeyEvent.KEYCODE_BACK) && webview.canGoBack()) {
+	    	webview.goBack();
+	        return true;
+	    }
+	    return super.onKeyDown(keyCode, event);
 	}
 
 	private class EventWebViewClient extends WebViewClient {
 		@Override
-		public boolean shouldOverrideUrlLoading(WebView view, String url) {
-
+		public boolean shouldOverrideUrlLoading(WebView view, String url){
+			
 			try {
-				URI uri = new URI(url);
-
-				if (uri.getScheme().equals("http")
-						|| uri.getScheme().equals("https")) {
+				URI uri= new URI(url);
+				
+				if(uri.getScheme().equals("http") || uri.getScheme().equals("https")){
 					view.loadUrl(url);
-				} else {
+				}
+				else{
 					Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 					startActivity(i);
 				}
-			} catch (URISyntaxException e) {
-			}
-
+			} catch (URISyntaxException e) {}
+			
 			return true;
 		}
 	}
+	
+	
+
+
+
 
 }

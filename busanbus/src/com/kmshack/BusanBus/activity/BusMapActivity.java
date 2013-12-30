@@ -1,69 +1,92 @@
 package com.kmshack.BusanBus.activity;
 
-import java.util.List;
-
-import kr.hyosang.coordinate.CoordPoint;
-import kr.hyosang.coordinate.TransCoord;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.maps.GeoPoint;
-import com.google.android.maps.MapView;
-import com.google.android.maps.Overlay;
-import com.kmshack.BusanBus.MapOverlay;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.kmshack.BusanBus.R;
 
-/**
- * ÌäπÏ†ï Ï†ïÎ•òÏÜåÏùò ÏúÑÏπòÌëúÏãú
- * @author kmshack
- *
- */
-public class BusMapActivity extends BaseMapActivity {
+public class BusMapActivity extends BaseActivity {
 
-	private MapView mMapView;
-	private int mMapZoom = 18;
-	private GeoPoint mGeoPoint;
-	private double mX, mY;
-	private int mTransX, mTransY;
+	private GoogleMap mGoogleMap;
+
+	private double x, y;
+	private String title;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.map);
 
+		try {
+			// Loading map
+			initilizeMap();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		tracker.trackPageView("/BusMap");
+
 		Intent intent = getIntent();
-		mX = Double.parseDouble(intent.getStringExtra("X"));
-		mY = Double.parseDouble(intent.getStringExtra("Y"));
+		x = Double.parseDouble(intent.getStringExtra("X"));
+		y = Double.parseDouble(intent.getStringExtra("Y"));
+		title = intent.getStringExtra("TITLE");
+		setTitle(title);
 
-		setTitleLeft(intent.getStringExtra("TITLE"));
+		String title = intent.getStringExtra("NAME").replace("¡§∑˘º“∏Ì: ", "");
+		String snippet = intent.getStringExtra("UNIQUEID").replace("¡§∑˘º“π¯»£: ", "");
 
-		CoordPoint tm = new CoordPoint(mX, mY);
-		CoordPoint wgs = TransCoord.getTransCoord(tm,
-				TransCoord.COORD_TYPE_WGS84, TransCoord.COORD_TYPE_WGS84);
+		if (mGoogleMap != null) {
+			double latitude = y;
+			double longitude = x;
 
-		mTransY = (int) ((wgs.x) * 1E6);
-		mTransX = (int) ((wgs.y) * 1E6);
+			LatLng latlng = new LatLng(latitude, longitude);
 
-		mGeoPoint = new GeoPoint(mTransX, mTransY);
+			// create marker
+			MarkerOptions marker = new MarkerOptions().position(latlng).title(title).snippet(snippet);
+			marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+			// adding marker
+			mGoogleMap.addMarker(marker).showInfoWindow();
 
-		mMapView = (MapView) findViewById(R.id.mapview);
-		mMapView.setBuiltInZoomControls(true);
-		mMapView.setSatellite(false);
-		mMapView.getController().setCenter(mGeoPoint);
-		mMapView.getController().setZoom(mMapZoom);
+			CameraPosition INIT = new CameraPosition.Builder().target(latlng).zoom(18F).bearing(0F) // orientation
+					.tilt(0F) // viewing angle
+					.build();
+			mGoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(INIT));
+		}
+	}
 
-		MapOverlay mapov = new MapOverlay(mGeoPoint, this);
+	/**
+	 * function to load map. If map is not created it will create it for you
+	 * */
+	private void initilizeMap() {
+		if (mGoogleMap == null) {
+			mGoogleMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 
-		List<Overlay> listOverlay = mMapView.getOverlays();
-		listOverlay.clear();
-		listOverlay.add(mapov);
+			if (mGoogleMap == null) {
+			} else {
+				mGoogleMap.setMyLocationEnabled(true);
+				mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
+				mGoogleMap.getUiSettings().setZoomGesturesEnabled(true);
+				mGoogleMap.getUiSettings().setMyLocationButtonEnabled(true);
 
-		mMapView.invalidate();
-
+				CameraPosition INIT = new CameraPosition.Builder().target(new LatLng(35.1796F, 129.076F)).zoom(10F).bearing(0F) // orientation
+						.tilt(0F) // viewing angle
+						.build();
+				mGoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(INIT));
+			}
+		}
 	}
 
 	@Override
-	protected boolean isRouteDisplayed() {
-		return false;
+	protected void onResume() {
+		super.onResume();
+		initilizeMap();
 	}
 
 }

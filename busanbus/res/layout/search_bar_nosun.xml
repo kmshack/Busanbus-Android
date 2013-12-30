@@ -3,38 +3,42 @@
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
 	android:gravity="center"
-	android:orientation="vertical"
-	android:src="@drawable/search_bg" >
+	android:orientation="vertical" >
 
-	<RelativeLayout
+	<LinearLayout
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:layout_centerVertical="true"
-		android:padding="7dip" >
+		android:layout_gravity="center"
+		android:layout_marginBottom="2dip"
+		android:layout_marginLeft="8dip"
+		android:layout_marginRight="8dip"
+		android:layout_marginTop="2dip"
+		android:background="@drawable/omnibox"
+		android:gravity="center"
+		android:orientation="horizontal"
+		android:padding="10dip" >
 
-		<LinearLayout
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/ic_local_search_general" />
+
+		<EditText
+			android:id="@+id/et_search_nosun"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:layout_centerVertical="true"
-			android:gravity="center_vertical" >
+			android:layout_weight="1"
+			android:background="#FFF"
+			android:gravity="center_vertical"
+			android:paddingLeft="4dip"
+			android:paddingRight="12dip"
+			android:textColor="#222"
+			android:textSize="14sp" />
+	</LinearLayout>
 
-			<EditText
-				android:id="@+id/et_search_nosun"
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:layout_weight="1"
-				android:background="@drawable/search_bar"
-				android:gravity="center_vertical"
-				android:paddingLeft="35dip"
-				android:textColor="#EF6000"
-				android:textSize="14sp" >
-			</EditText>
-		</LinearLayout>
-	</RelativeLayout>
-
-	<ImageView
-		android:layout_width="fill_parent"
-		android:layout_height="1px"
-		android:background="#D2D2C8" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2px"
+        android:background="@color/bar" />
 
 </LinearLayout>

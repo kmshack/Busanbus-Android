@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string name="app_name">부산버스</string>
+	<string name="profile">개발자: 김민수\nkmshack@naver.com\nhttp://www.kmshack.kr</string>
+	<string name="ver_info">Android 2.1이상 \n프로그램 버전: 2.2.4\n노선데이터 버전: 20131125\n최종 업데이트일: 2013. 11. 25</string>
+	<string name="loading_msg">최신 노선데이터로 업데이트중 입니다.</string>
+	<string name="reloading_msg">노선데이터를 초기화 중입니다.</string>
+
+</resources>

@@ -1,64 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	android:background="#42609C" >
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:background="#42609C">
 
-	<LinearLayout
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-		android:layout_gravity="center"
-		android:gravity="center"
-		android:orientation="vertical" >
-
-		<ImageView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginBottom="16dip"
-			android:src="@drawable/bus" />
-
-		<TextView
-			android:id="@+id/text_top_name"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:focusableInTouchMode="true"
-			android:shadowColor="#666666"
-			android:shadowDx="3"
-			android:shadowDy="3"
-			android:shadowRadius="3"
-			android:text="@string/app_name"
-			android:textColor="#FFFFFF"
-			android:textSize="26sp"
-			android:textStyle="bold" >
+    <LinearLayout 
+	  android:layout_width="fill_parent"
+	  android:layout_height="fill_parent"
+	  android:orientation="vertical"
+	  android:gravity="center"
+  	  android:layout_gravity="center">
+	  
+	 	<ImageView 
+	 	    	android:layout_width="wrap_content" 
+				android:layout_height="wrap_content"
+				android:src="@drawable/bus"
+				android:layout_marginBottom="16dip"
+				/>
+	 	
+	 	<TextView
+				android:id="@+id/text_top_name"
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content"
+				android:focusableInTouchMode="true"
+				android:textColor="#FFFFFF"
+				android:textSize="26sp"
+				android:text="@string/app_name"
+				android:textStyle="bold"
+				android:shadowColor="#666666"
+				android:shadowDx="3"
+				android:shadowDy="3"
+				android:shadowRadius="3">
 		</TextView>
-
+		
 		<TextView
-			android:layout_width="wrap_content"
+			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content"
 			android:focusableInTouchMode="true"
+			android:textColor="#FFFFFF"
+			android:textSize="12sp"
+			android:text="＠KMSHACK"
+			android:textStyle="bold"
 			android:shadowColor="#666666"
 			android:shadowDx="2"
 			android:shadowDy="2"
-			android:shadowRadius="2"
-			android:text="＠KMSHACK"
-			android:textColor="#FFFFFF"
-			android:textSize="12sp"
-			android:textStyle="bold" >
+			android:shadowRadius="2">
 		</TextView>
-	</LinearLayout>
-
-	<TextView
-		android:id="@+id/msg"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignParentBottom="true"
-		android:layout_centerHorizontal="true"
-		android:layout_marginBottom="50dip"
-		android:shadowColor="#666666"
+		
+		</LinearLayout>
+		
+    <TextView
+        android:id="@+id/msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dip"
+        android:textSize="11sp" 
+        android:layout_centerHorizontal="true"
+        android:shadowColor="#666666"
 		android:shadowDx="1"
 		android:shadowDy="1"
-		android:shadowRadius="1"
-		android:textColor="#ffffff"
-		android:textSize="11sp" />
+		android:shadowRadius="1"/>
 
-</RelativeLayout>
+  </RelativeLayout>
+  

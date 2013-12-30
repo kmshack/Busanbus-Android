@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme" parent="@android:style/Theme.Light.NoTitleBar" />
-    
-        <style name="loading" >
-         <item name="android:indeterminateDrawable">@drawable/progress_ani</item>
-    </style>
+
+	<style name="loading">
+		<item name="android:indeterminateDrawable">@drawable/progress_ani</item>
+		<item name="android:indeterminateBehavior">repeat</item>
+		<item name="android:indeterminateDuration">400</item>
+	</style>
+
 </resources>

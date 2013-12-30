@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">    
-	<item android:id="@+id/menu_main"   
-	    android:icon="@drawable/ic_menu_search"       
-	android:title="검색" />    
-	
-	<item android:id="@+id/menu_noti"    
-	     android:icon="@drawable/ic_menu_notifications"           
-    android:title="공지사항" />
-    
-    
-	<item android:id="@+id/menu_exit"         
-	    android:icon="@drawable/ic_menu_close_clear_cancel"           
-	android:title="닫기" />
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+	<item
+		android:id="@+id/search"
+		android:icon="@drawable/ic_menu_search"
+		android:showAsAction="ifRoom|withText">
+	</item>
 </menu>

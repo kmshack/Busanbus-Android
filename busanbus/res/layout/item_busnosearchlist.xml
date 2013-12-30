@@ -1,56 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent"
+	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:layout_gravity="center_vertical"
 	android:background="@drawable/list_selector"
-	android:minHeight="58dip" >
+	android:gravity="center_vertical"
+	android:minHeight="62dip"
+	android:orientation="vertical"
+	android:paddingLeft="14dip"
+	android:paddingRight="14dip" >
 
-	<LinearLayout
-		android:layout_width="fill_parent"
+	<com.kmshack.BusanBus.view.SizeableTextView
+		android:id="@+id/title"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_gravity="center_vertical"
-		android:layout_marginLeft="14dip"
-		android:layout_marginRight="8dip"
-		android:layout_weight="1"
-		android:orientation="vertical">
+		android:ellipsize="end"
+		android:maxLines="1"
+		android:singleLine="true"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:textStyle="bold"
+		android:textColor="#333" />
 
-		<com.kmshack.BusanBus.view.SizeableTextView
-			android:id="@+id/text1"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textAppearance="?android:attr/textAppearanceMedium"
-			android:textStyle="bold" />
-
-		<LinearLayout
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content">
-
-			<com.kmshack.BusanBus.view.SizeableTextView
-				android:id="@+id/text2"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textSize="13sp" />
-
-			<com.kmshack.BusanBus.view.SizeableTextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text=" ↔ "
-				android:textSize="13sp" />
-
-			<com.kmshack.BusanBus.view.SizeableTextView
-				android:id="@+id/text3"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textSize="13sp" />
-		</LinearLayout>
-	</LinearLayout>
-
-	<ImageView
-		android:layout_width="wrap_content"
+	<com.kmshack.BusanBus.view.SizeableTextView
+		android:id="@+id/subtitle"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_gravity="center"
-		android:layout_marginRight="4dip"
-		android:background="@drawable/right" />
+		android:layout_marginTop="2dip"
+		android:ellipsize="end"
+		android:maxLines="1"
+		android:singleLine="true"
+		android:textAppearance="?android:attr/textAppearanceSmall"
+		android:textColor="#333" />
 
 </LinearLayout>

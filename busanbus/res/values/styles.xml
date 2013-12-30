@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="title">
-        <item name="android:maxLines">1</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:ellipsize">marquee</item>
-        <item name="android:focusable">true</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:shadowColor">#000000</item>
-        <item name="android:shadowDx">3</item>
-        <item name="android:shadowDy">3</item>
-        <item name="android:shadowRadius">3</item>
-    </style>
-    
-    
-    <style name="dialog" parent="@android:style/Theme.Dialog">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowNoTitle">true</item>
-    </style>
-    
-    <style name="Theme" parent="@android:style/Theme.Light.NoTitleBar" />
-	
-    <style name="loading" >
-    </style>
+	<style name="MyTheme" parent="@style/Theme.Sherlock.Light.DarkActionBar">
+		<item name="android:windowBackground">@color/background</item>
+	</style>
+
+	<style name="title">
+		<item name="android:maxLines">1</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:ellipsize">marquee</item>
+		<item name="android:focusable">true</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:shadowColor">#000000</item>
+		<item name="android:shadowDx">3</item>
+		<item name="android:shadowDy">3</item>
+		<item name="android:shadowRadius">3</item>
+	</style>
+
+	<style name="dialog" parent="@android:style/Theme.Dialog">
+		<item name="android:windowBackground">@android:color/transparent</item>
+		<item name="android:windowNoTitle">true</item>
+	</style>
+
+	<style name="loading">
+		<item name="android:indeterminateDrawable">@drawable/progress_ani</item>
+		<item name="android:indeterminateBehavior">repeat</item>
+		<item name="android:indeterminateDuration">400</item>
+	</style>
 
 </resources>

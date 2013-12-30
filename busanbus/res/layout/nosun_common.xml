@@ -8,7 +8,7 @@
 
 	<LinearLayout
 		android:layout_width="fill_parent"
-		android:layout_height="42dip" >
+		android:layout_height="54dip" >
 
 		<LinearLayout
 			android:id="@+id/nosun_tap_favorite"
@@ -19,14 +19,24 @@
 			android:gravity="center"
 			android:orientation="vertical" >
 
+			<ImageView
+				android:id="@+id/nosun_tap_favorite_image"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+
 			<TextView
 				android:id="@+id/nosun_tap_favorite_text"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="2dip"
 				android:text="노선정보"
-				android:textSize="14sp" />
+				android:textSize="11sp" />
 		</LinearLayout>
+
+		<View
+			android:layout_width="1px"
+			android:layout_height="fill_parent"
+			android:background="@color/bar" />
 
 		<LinearLayout
 			android:id="@+id/nosun_tap_nosun"
@@ -37,14 +47,24 @@
 			android:gravity="center"
 			android:orientation="vertical" >
 
+			<ImageView
+				android:id="@+id/nosun_tap_nosun_image"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+
 			<TextView
 				android:id="@+id/nosun_tap_nosun_text"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="2dip"
 				android:text="실시간위치"
-				android:textSize="14sp" />
+				android:textSize="11sp" />
 		</LinearLayout>
+
+		<View
+			android:layout_width="1px"
+			android:layout_height="fill_parent"
+			android:background="@color/bar" />
 
 		<LinearLayout
 			android:id="@+id/nosun_tap_busstop"
@@ -54,6 +74,11 @@
 			android:layout_weight="1"
 			android:gravity="center"
 			android:orientation="vertical" >
+
+			<ImageView
+				android:id="@+id/nosun_tap_busstop_image"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
 
 			<TextView
 				android:id="@+id/nosun_tap_busstop_text"
@@ -66,8 +91,13 @@
 				android:marqueeRepeatLimit="marquee_forever"
 				android:singleLine="true"
 				android:text="상행선"
-				android:textSize="14sp" />
+				android:textSize="11sp" />
 		</LinearLayout>
+
+		<View
+			android:layout_width="1px"
+			android:layout_height="fill_parent"
+			android:background="@color/bar" />
 
 		<LinearLayout
 			android:id="@+id/nosun_tap_setting"
@@ -77,6 +107,11 @@
 			android:layout_weight="1"
 			android:gravity="center"
 			android:orientation="vertical" >
+
+			<ImageView
+				android:id="@+id/nosun_tap_setting_image"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
 
 			<TextView
 				android:id="@+id/nosun_tap_setting_text"
@@ -89,7 +124,7 @@
 				android:marqueeRepeatLimit="marquee_forever"
 				android:singleLine="true"
 				android:text="하행선"
-				android:textSize="14sp" />
+				android:textSize="11sp" />
 		</LinearLayout>
 	</LinearLayout>
 
@@ -138,8 +173,10 @@
 			<TextView
 				android:id="@+id/btn_nosun_map"
 				android:layout_width="fill_parent"
-				android:layout_height="48dip"
+				android:layout_height="56dip"
 				android:background="@drawable/list_selector"
+				android:drawableLeft="@drawable/ic_main_tab_location_normal"
+				android:drawablePadding="8dip"
 				android:gravity="center_vertical"
 				android:paddingLeft="12dip"
 				android:text="노선 지도보기"
@@ -151,6 +188,19 @@
 				android:layout_width="fill_parent"
 				android:layout_height="1px"
 				android:background="#D2D2C8" />
+
+			<FrameLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:padding="14dip" >
+
+				<fragment
+					android:id="@+id/map"
+					android:name="com.google.android.gms.maps.SupportMapFragment"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent" />
+			</FrameLayout>
 		</LinearLayout>
 
 		<LinearLayout
@@ -181,6 +231,23 @@
 					android:layout_centerInParent="true"
 					android:background="@drawable/dialog_full_holo_light"
 					android:padding="20dip" />
+
+				<RelativeLayout
+					android:id="@+id/btn_reflash"
+					android:layout_width="65dip"
+					android:layout_height="65dip"
+					android:layout_alignParentBottom="true"
+					android:layout_alignParentRight="true"
+					android:layout_marginBottom="10dip"
+					android:layout_marginRight="10dip"
+					android:background="@drawable/dialog_full_holo_light" >
+
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_centerInParent="true"
+						android:src="@drawable/ic_refresh" />
+				</RelativeLayout>
 			</RelativeLayout>
 		</LinearLayout>
 
@@ -195,6 +262,7 @@
 				android:layout_width="fill_parent"
 				android:layout_height="fill_parent"
 				android:cacheColorHint="@android:color/transparent"
+				android:dividerHeight="1px"
 				android:fastScrollEnabled="true"
 				android:footerDividersEnabled="false"
 				android:headerDividersEnabled="false"
@@ -212,6 +280,7 @@
 				android:layout_width="fill_parent"
 				android:layout_height="fill_parent"
 				android:cacheColorHint="@android:color/transparent"
+				android:dividerHeight="1px"
 				android:fastScrollEnabled="true"
 				android:footerDividersEnabled="false"
 				android:headerDividersEnabled="false"

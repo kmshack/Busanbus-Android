@@ -31,9 +31,13 @@
 				android:layout_width="wrap_content"
 				android:layout_height="fill_parent"
 				android:layout_gravity="bottom"
-				android:text="▼ 지도 표시"
-				android:textColor="#EF6000"
-				android:textSize="15sp"
+				android:background="@drawable/list_selector"
+				android:drawableLeft="@drawable/ic_main_tab_location_normal"
+				android:drawablePadding="4dip"
+				android:gravity="center_vertical"
+				android:text="지도숨김"
+				android:textColor="#333"
+				android:textSize="13sp"
 				android:textStyle="bold" />
 		</LinearLayout>
 
@@ -42,7 +46,6 @@
 			android:layout_height="wrap_content"
 			android:layout_marginLeft="15dip"
 			android:layout_marginRight="15dip"
-			android:layout_marginTop="2dip"
 			android:orientation="vertical" >
 
 			<com.kmshack.BusanBus.view.SizeableTextView
@@ -51,16 +54,20 @@
 				android:layout_height="wrap_content"
 				android:textSize="13sp" />
 
-			<com.google.android.maps.MapView
-				android:id="@+id/mapview"
-				android:layout_width="fill_parent"
+			<FrameLayout
+				android:id="@+id/layout_map"
+				android:layout_width="match_parent"
 				android:layout_height="150dip"
 				android:layout_marginLeft="2dip"
 				android:layout_marginRight="2dip"
-				android:layout_marginTop="5dip"
-				android:apiKey="@string/google_map_api_key"
-				android:clickable="true"
-				android:visibility="gone" />
+				android:layout_marginTop="3dip" >
+
+				<fragment
+					android:id="@+id/map"
+					android:name="com.google.android.gms.maps.SupportMapFragment"
+					android:layout_width="match_parent"
+					android:layout_height="150dip" />
+			</FrameLayout>
 		</LinearLayout>
 
 		<ImageView
@@ -80,21 +87,28 @@
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
 			android:cacheColorHint="@android:color/transparent"
+			android:dividerHeight="1px"
 			android:fastScrollEnabled="true"
 			android:footerDividersEnabled="false"
 			android:headerDividersEnabled="false"
 			android:listSelector="@drawable/list_selector" />
 
-		<ImageView
+		<RelativeLayout
 			android:id="@+id/busstopdetail_reflash_top"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
+			android:layout_width="65dip"
+			android:layout_height="65dip"
 			android:layout_alignParentBottom="true"
 			android:layout_alignParentRight="true"
-			android:layout_marginBottom="40dip"
+			android:layout_marginBottom="10dip"
 			android:layout_marginRight="10dip"
-			android:background="@drawable/dialog_full_holo_light"
-			android:src="@drawable/ic_menu_refresh" />
+			android:background="@drawable/dialog_full_holo_light" >
+
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerInParent="true"
+				android:src="@drawable/ic_refresh" />
+		</RelativeLayout>
 	</RelativeLayout>
 
 </LinearLayout>

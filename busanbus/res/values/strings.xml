@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">부산버스</string>
 
-    <string name="profile">개발자: 김민수\n이메일: kmshack@naver.com\nFacebook: http://fb.com/kmshack</string>
-    <string name="ver_info">플랫폼: Android 2.1이상 \n프로그램 버전: 2.1.1\n노선데이터 버전: 20121204\n최종 업데이트일: 2012. 12. 04</string>
-    <string name="loading_msg">최신 데이터 업데이트중..</string>
-    
-    <string name="google_map_api_key">google map api key</string> 
-    
+	<string name="app_name">BusanBus</string>
+	<string name="profile">Developers: Minsoo, Kim\nEmail: kmshack@naver.com</string>
+	<string name="ver_info">Platform: Android 2.1~ \nApp Version: 2.2.4\nData Version: 20131125\nLast Update: 2013. 11. 25</string>
+	<string name="loading_msg">Data Updating..</string>
+	<string name="drawer_open">Open navigation drawer</string>
+	<string name="drawer_close">Close navigation drawer</string>
+	<string name="license">Licensed under the Apache License, Version 2.0 (the "License");\n\nYou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an "AS IS" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and limitations under the License.\n\n\nDragSortListView.\nCopyright 2012 Carl Bauer.\n\nActionBarSherlock.\nCopyright 2012 Jake Wharton.\n\nSherlockNavigationDrawer.\nCopyright 2013 Nicolas Jafelle.\n\nTransCoord.\nDaum OpenAPI License.\n\nBusanBus Application For Android.\nCopyright 2013 Kim Min-Soo.\n\n</string>
+
 </resources>
