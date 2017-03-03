@@ -1,18 +1,15 @@
 Busanbus for Android 2.2.4
 ========
+[![Analytics](https://ga-beacon.appspot.com/UA-51734472-2/BusanBus/readme)](https://github.com/kmshack/busanbus-android)
 
-<br/>
+
+@Deprecated 
 
 부산버스 안드로이드 앱 ( http://play.google.com/store/apps/details?id=com.kmshack.BusanBus ) 
 오픈소스
 
-<br/>
-
-
 ![busanbus screens](screens.png)
 
-
-<br/>
 필요한 라이브러리
 -----
 
@@ -22,7 +19,6 @@ Busanbus for Android 2.2.4
 - DragSort ListView
 
 
-<br/>
 데이터 정보
 -----
 
@@ -33,7 +29,6 @@ Busanbus for Android 2.2.4
 - 기타 추가적인 정보 http://bus.busan.go.kr
 
 
-<br/>
 주의점 및 참고사항
 -----
 
@@ -46,25 +41,5 @@ Busanbus for Android 2.2.4
  - 데이터파일은 앱내에 저장되어 있으며 안드로이드 특성상 데이터를 분할 하여 앱 실행시 다시 합치는 방식으로 앱 분할 방법은 database/datacut 프로젝트를 참고하시기 바랍니다.
 
 
-
-<br/>
-라이센스
------
-
-- 별도로 언급 된 경우를 제외, 부산버스앱은 아파치 라이센스 2.0버전( http://www.apache.org/licenses/LICENSE-2.0.html )을 기본으로 합니다.
-
-- 누구나 사용뿐만아니라 수정 및 재배포 2차적인 저작물도 개발 가능합니다. 
-
-
-<br/><br/><br/>
-
 추가 문의사항은 이슈게시판 또는 개발자 블로그( http://www.kmshack.kr )에 글을 남겨 주기시 바랍니다.
-
-
-<br/><br/>
-
-
-
-[![Analytics](https://ga-beacon.appspot.com/UA-51734472-2/BusanBus/readme)](https://github.com/kmshack/busanbus-android)
-
 
