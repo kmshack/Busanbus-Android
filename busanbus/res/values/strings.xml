@@ -9,4 +9,9 @@
 	<string name="drawer_close">Close navigation drawer</string>
 	<string name="license">Licensed under the Apache License, Version 2.0 (the "License");\n\nYou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an "AS IS" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and limitations under the License.\n\n\nDragSortListView.\nCopyright 2012 Carl Bauer.\n\nActionBarSherlock.\nCopyright 2012 Jake Wharton.\n\nSherlockNavigationDrawer.\nCopyright 2013 Nicolas Jafelle.\n\nTransCoord.\nDaum OpenAPI License.\n\nBusanBus Application For Android.\nCopyright 2013 Kim Min-Soo.\n\n</string>
 
+	<!-- Arrival info format strings - using %s for String values, NOT %d -->
+	<!-- Fix for IllegalFormatConversionException: d != java.lang.String -->
+	<string name="arrival_info_format">%1$s분후 도착\n%2$s번째 전 정류소\n%3$s번 차량</string>
+	<string name="no_arrival_info">도착정보 없음.</string>
+
 </resources>
