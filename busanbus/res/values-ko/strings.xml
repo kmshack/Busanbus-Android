@@ -7,4 +7,9 @@
 	<string name="loading_msg">최신 노선데이터로 업데이트중 입니다.</string>
 	<string name="reloading_msg">노선데이터를 초기화 중입니다.</string>
 
+	<!-- Arrival info format strings - using %s for String values, NOT %d -->
+	<!-- Fix for IllegalFormatConversionException: d != java.lang.String -->
+	<string name="arrival_info_format">%1$s분후 도착\n%2$s번째 전 정류소\n%3$s번 차량</string>
+	<string name="no_arrival_info">도착정보 없음.</string>
+
 </resources>
