@@ -39,7 +39,17 @@
 		android:layout_weight="1"
 		android:gravity="center"
 		android:padding="35dip"
+		android:visibility="gone"
 		android:text="즐겨찾기된 노선/정류소가 없습니다. \n\n노선 및 정류소 검색 후 실시간도착 정보 하단에서 즐겨찾기를 하실 수 있습니다." />
+
+	<ProgressBar
+		android:id="@+id/favorite_loading"
+		style="?android:attr/progressBarStyle"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_weight="1"
+		android:gravity="center"
+		android:visibility="gone" />
 
 	<ImageView
 		android:layout_width="fill_parent"
