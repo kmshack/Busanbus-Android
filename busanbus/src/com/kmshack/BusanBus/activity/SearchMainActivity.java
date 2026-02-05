@@ -38,6 +38,7 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
@@ -140,6 +141,9 @@ public class SearchMainActivity extends BaseActivity implements android.location
 	private ImageView mCheckSettingFavorite;
 	private ImageView mCheckSettingFavoriteLocation;
 
+	private ProgressBar mFavoriteLoading;
+	private TextView mFavoriteEmpty;
+
 	private int mFavoriteMode = DEFAULT_TAB;
 
 	private Handler mHandler;
@@ -162,14 +166,14 @@ public class SearchMainActivity extends BaseActivity implements android.location
 					int targetOrderNum;
 					int startTo;
 
-					// Å« -> ÀÛ
+					// Å« -> ï¿½ï¿½
 					if (from < to) {
 						startTo = to + 1;
 						cursor.moveToPosition(to);
 						targetOrderNum = cursor.getInt(cursor.getColumnIndex(UserData.ORDERING)) + 1;
 					}
 
-					// ÀÛ -> Å«
+					// ï¿½ï¿½ -> Å«
 					else {
 						if (to > 0) {
 							startTo = to;
@@ -215,14 +219,14 @@ public class SearchMainActivity extends BaseActivity implements android.location
 					int targetOrderNum;
 					int startTo;
 
-					// Å« -> ÀÛ
+					// Å« -> ï¿½ï¿½
 					if (from < to) {
 						startTo = to + 1;
 						cursor.moveToPosition(to);
 						targetOrderNum = cursor.getInt(cursor.getColumnIndex(UserData.ORDERING)) + 1;
 					}
 
-					// ÀÛ -> Å«
+					// ï¿½ï¿½ -> Å«
 					else {
 						if (to > 0) {
 							startTo = to;
@@ -319,7 +323,7 @@ public class SearchMainActivity extends BaseActivity implements android.location
 	};
 
 	private void showDeleteDialog(DialogInterface.OnClickListener ok, DialogInterface.OnClickListener cancel) {
-		new AlertDialog.Builder(this).setTitle("Áñ°ÜÃ£±â »èÁ¦").setMessage("Áñ°ÜÃ£±â¸¦ »èÁ¦ ÇÏ½Ã°Ú½À´Ï±î?").setPositiveButton("È®ÀÎ", ok).setNegativeButton("Ãë¼Ò", cancel).show();
+		new AlertDialog.Builder(this).setTitle("ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½").setMessage("ï¿½ï¿½ï¿½Ã£ï¿½â¸¦ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½Ã°Ú½ï¿½ï¿½Ï±ï¿½?").setPositiveButton("È®ï¿½ï¿½", ok).setNegativeButton("ï¿½ï¿½ï¿½", cancel).show();
 
 	}
 
@@ -382,6 +386,8 @@ public class SearchMainActivity extends BaseActivity implements android.location
 			else
 				setFavoriteTabChange(FAVORITE_TAB_NOSUN);
 
+			showFavoriteLoading();
+
 			switch (mFavoriteMode) {
 			case FAVORITE_TAB_NOSUN:
 				favoriteBusStop();
@@ -397,7 +403,7 @@ public class SearchMainActivity extends BaseActivity implements android.location
 
 			tracker.trackEvent("TabClicks", // Category
 					"Favorite", // Action
-					"Áñ°ÜÃ£±â", // Label
+					"ï¿½ï¿½ï¿½Ã£ï¿½ï¿½", // Label
 					0); // Value
 			break;
 
@@ -426,7 +432,7 @@ public class SearchMainActivity extends BaseActivity implements android.location
 
 			tracker.trackEvent("TabClicks", // Category
 					"LineSearch", // Action
-					"³ë¼±¹øÈ£", // Label
+					"ï¿½ë¼±ï¿½ï¿½È£", // Label
 					0); // Value
 
 			break;
@@ -456,7 +462,7 @@ public class SearchMainActivity extends BaseActivity implements android.location
 
 			tracker.trackEvent("TabClicks", // Category
 					"BusStopSearch", // Action
-					"Á¤·ù¼Ò", // Label
+					"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", // Label
 					0); // Value
 
 			break;
@@ -484,7 +490,7 @@ public class SearchMainActivity extends BaseActivity implements android.location
 
 			tracker.trackEvent("TabClicks", // Category
 					"Information", // Action
-					"Á¤º¸", // Label
+					"ï¿½ï¿½ï¿½ï¿½", // Label
 					0); // Value
 
 			
@@ -508,8 +514,8 @@ public class SearchMainActivity extends BaseActivity implements android.location
 					}
 				};
 
-				new AlertDialog.Builder(this).setTitle("À§Ä¡ Á¤º¸ È°¿ë").setMessage("GoogleÀÇ À§Ä¡ ¼­ºñ½º¿¡¼­ ÀÍ¸íÀÇ À§Ä¡ Á¤º¸¸¦ ¼öÁýÇÒ ¼ö ÀÖµµ·Ï ÇÕ´Ï´Ù. À§Ä¡ Á¤º¸µ¥ÀÌÅÍ´Â ¼­¹ö¶Ç´Â °³ÀÎ±â±â¿¡ ÀúÀåÇÏÁö ¾ÊÀ¸¸ç ´Ü¼øÈ÷ È°¿ëÇÏ¿© ÇöÀç À§Ä¡¿¡¼­ °¡±î¿î Á¤·ù¼Ò¸¦ °Ë»öÇÏ±âÀ§ÇØ »ç¿ëµË´Ï´Ù.").setPositiveButton("µ¿ÀÇ", ok)
-						.setNegativeButton("µ¿ÀÇ¾ÈÇÔ", cancel).show();
+				new AlertDialog.Builder(this).setTitle("ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½").setMessage("Googleï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ñ½º¿ï¿½ï¿½ï¿½ ï¿½Í¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Öµï¿½ï¿½ï¿½ ï¿½Õ´Ï´ï¿½. ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½Î±ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ü¼ï¿½ï¿½ï¿½ È°ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò¸ï¿½ ï¿½Ë»ï¿½ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ë´Ï´ï¿½.").setPositiveButton("ï¿½ï¿½ï¿½ï¿½", ok)
+						.setNegativeButton("ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½", cancel).show();
 				
 			}else{
 				initilizeMap();
@@ -544,7 +550,7 @@ public class SearchMainActivity extends BaseActivity implements android.location
 		Criteria criteria = new Criteria();
 		String provider = mLocationManager.getBestProvider(criteria, true);
 
-		if (provider == null) { // À§Ä¡Á¤º¸ ¼³Á¤ÀÌ ¾ÈµÇ¾î ÀÖÀ¸¸é ¼³Á¤ÇÏ´Â ¿¢Æ¼ºñÆ¼·Î ÀÌµ¿ÇÕ´Ï´Ù
+		if (provider == null) { // ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ÈµÇ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Æ¼ï¿½ï¿½Æ¼ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Õ´Ï´ï¿½
 			DialogInterface.OnClickListener cancel = new DialogInterface.OnClickListener() {
 
 				public void onClick(DialogInterface dialog, int which) {
@@ -562,10 +568,10 @@ public class SearchMainActivity extends BaseActivity implements android.location
 				}
 			};
 
-			new AlertDialog.Builder(this).setTitle("À§Ä¡¼­ºñ½º ¼³Á¤").setMessage("À§Ä¡¼­ºñ½º°¡ ¼³Á¤µÇÁö ¾Ê¾Æ ÇöÀç ¼­ºñ½º¸¦ »ç¿ëÇÏ½Ç ¼ö ¾ø½À´Ï´Ù. À§Ä¡¼­ºñ½º ¼³Á¤À» ÇÏ½Ã°Ú½À´Ï±î?").setPositiveButton("¼³Á¤", ok)
-					.setNegativeButton("´Ý±â", cancel).show();
+			new AlertDialog.Builder(this).setTitle("ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½").setMessage("ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ñ½º°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ñ½º¸ï¿½ ï¿½ï¿½ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½Ã°Ú½ï¿½ï¿½Ï±ï¿½?").setPositiveButton("ï¿½ï¿½ï¿½ï¿½", ok)
+					.setNegativeButton("ï¿½Ý±ï¿½", cancel).show();
 
-		} else { // À§Ä¡ Á¤º¸ ¼³Á¤ÀÌ µÇ¾î ÀÖÀ¸¸é ÇöÀçÀ§Ä¡¸¦ ¹Þ¾Æ¿É´Ï´Ù.
+		} else { // ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Þ¾Æ¿É´Ï´ï¿½.
 			mLocationManager.requestLocationUpdates(provider, 1, 1, this);
 			mGoogleMap.setMyLocationEnabled(true);
 			mGoogleMap.getMyLocation();
@@ -658,11 +664,13 @@ public class SearchMainActivity extends BaseActivity implements android.location
 
 			case R.id.favorite_tab_nosun:
 				setFavoriteTabChange(FAVORITE_TAB_NOSUN);
+				showFavoriteLoading();
 				favoriteNosun();
 				break;
 
 			case R.id.favorite_tab_busstop:
 				setFavoriteTabChange(FAVORITE_TAB_BUSSTOP);
+				showFavoriteLoading();
 				favoriteBusStop();
 				break;
 
@@ -676,6 +684,8 @@ public class SearchMainActivity extends BaseActivity implements android.location
 		super.onResume();
 
 		if (mTabMode == TAB_FAVORITE) {
+
+			showFavoriteLoading();
 
 			switch (mFavoriteMode) {
 			case FAVORITE_TAB_NOSUN:
@@ -704,7 +714,7 @@ public class SearchMainActivity extends BaseActivity implements android.location
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.main_common);
-		setTitle("ºÎ»ê¹ö½º");
+		setTitle("ï¿½Î»ï¿½ï¿½ï¿½ï¿½");
 		mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -774,7 +784,9 @@ public class SearchMainActivity extends BaseActivity implements android.location
 
 		mNosunListView.setEmptyView((TextView) findViewById(R.id.nosun_empty));
 		mBusStopListView.setEmptyView((TextView) findViewById(R.id.busstop_empty));
-		mFavoriteListView.setEmptyView((TextView) findViewById(R.id.favorite_empty));
+
+		mFavoriteEmpty = (TextView) findViewById(R.id.favorite_empty);
+		mFavoriteLoading = (ProgressBar) findViewById(R.id.favorite_loading);
 
 		mFavoriteListView.setDropListener(mOnDrop);
 		mFavoriteListView.setRemoveListener(mOnRemove);
@@ -822,7 +834,7 @@ public class SearchMainActivity extends BaseActivity implements android.location
 		mNosunSearchView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
 		mNosunEditText = (EditText) mNosunSearchView.findViewById(R.id.et_search_nosun);
-		mNosunEditText.setHint("³ë¼±¹øÈ£ °Ë»ö");
+		mNosunEditText.setHint("ï¿½ë¼±ï¿½ï¿½È£ ï¿½Ë»ï¿½");
 		mNosunEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
 		mNosunEditText.addTextChangedListener(new TextWatcher() {
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -875,7 +887,7 @@ public class SearchMainActivity extends BaseActivity implements android.location
 
 		mBusstopSearchView = (LinearLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.search_bar_busstop, null);
 		mBusStopEditText = (EditText) mBusstopSearchView.findViewById(R.id.et_search_busstop);
-		mBusStopEditText.setHint("Á¤·ù¼Ò¸í/¹øÈ£ °Ë»ö");
+		mBusStopEditText.setHint("ï¿½ï¿½ï¿½ï¿½ï¿½Ò¸ï¿½/ï¿½ï¿½È£ ï¿½Ë»ï¿½");
 		mBusStopEditText.setInputType(InputType.TYPE_CLASS_TEXT);
 		mBusStopEditText.addTextChangedListener(new TextWatcher() {
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -981,7 +993,7 @@ public class SearchMainActivity extends BaseActivity implements android.location
 		mFavoriteImageBusstop.setOnClickListener(mTabClickListener);
 
 		searchNosun("");
-		searchBusStop("ºÎ»ê");
+		searchBusStop("ï¿½Î»ï¿½");
 
 		if (mBusanBusPrefrence.getIsFavoriteStart()) {
 			setTabChange(TAB_FAVORITE);
@@ -998,13 +1010,13 @@ public class SearchMainActivity extends BaseActivity implements android.location
 
 		switch (mBusanBusPrefrence.getTextSize()) {
 		case 0:
-			mTextViewSettingTextSize.setText("º¸Åë");
+			mTextViewSettingTextSize.setText("ï¿½ï¿½ï¿½ï¿½");
 			break;
 		case 2:
-			mTextViewSettingTextSize.setText("Å©°Ô");
+			mTextViewSettingTextSize.setText("Å©ï¿½ï¿½");
 			break;
 		case 4:
-			mTextViewSettingTextSize.setText("¾ÆÁÖÅ©°Ô");
+			mTextViewSettingTextSize.setText("ï¿½ï¿½ï¿½ï¿½Å©ï¿½ï¿½");
 			break;
 
 		}
@@ -1034,6 +1046,17 @@ public class SearchMainActivity extends BaseActivity implements android.location
 
 	}
 
+	private void showFavoriteLoading() {
+		mFavoriteListView.setEmptyView(null);
+		mFavoriteEmpty.setVisibility(View.GONE);
+		mFavoriteLoading.setVisibility(View.VISIBLE);
+	}
+
+	private void hideFavoriteLoading() {
+		mFavoriteLoading.setVisibility(View.GONE);
+		mFavoriteListView.setEmptyView(mFavoriteEmpty);
+	}
+
 	private void favoriteNosun() {
 		Cursor cursor = mUserDb.selectFavoriteNosun();
 		if (mMainNosunFavoriteAdapter == null) {
@@ -1044,8 +1067,11 @@ public class SearchMainActivity extends BaseActivity implements android.location
 
 		mFavoriteListView.setAdapter(mMainNosunFavoriteAdapter);
 
-		mFavoriteImageNosun.setText("³ë¼±(" + cursor.getCount() + ")");
+		mFavoriteImageNosun.setText("ï¿½ë¼±(" + cursor.getCount() + ")");
 
+		if (mFavoriteMode == FAVORITE_TAB_NOSUN) {
+			hideFavoriteLoading();
+		}
 	}
 
 	private void favoriteBusStop() {
@@ -1059,10 +1085,14 @@ public class SearchMainActivity extends BaseActivity implements android.location
 
 		mFavoriteListView.setAdapter(mMainStopFavoriteAdapter);
 
-		mFavoriteImageBusstop.setText("Á¤·ù¼Ò(" + cursor.getCount() + ")");
+		mFavoriteImageBusstop.setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(" + cursor.getCount() + ")");
+
+		if (mFavoriteMode == FAVORITE_TAB_BUSSTOP) {
+			hideFavoriteLoading();
+		}
 	}
 
-	// Back Key °ü·Ã
+	// Back Key ï¿½ï¿½ï¿½ï¿½
 	private Handler mFinishHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -1105,7 +1135,7 @@ public class SearchMainActivity extends BaseActivity implements android.location
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			if (!mFlag) {
-				Toast.makeText(getApplicationContext(), "'µÚ·Î' ¹öÆ°À» ÇÑ¹ø ´õ ´©¸£½Ã¸é Á¾·áµË´Ï´Ù.", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "'ï¿½Ú·ï¿½' ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½Ñ¹ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ã¸ï¿½ ï¿½ï¿½ï¿½ï¿½Ë´Ï´ï¿½.", Toast.LENGTH_SHORT).show();
 				mFlag = true;
 				mFinishHandler.sendEmptyMessageDelayed(0, 2000);
 				return false;
@@ -1256,7 +1286,7 @@ public class SearchMainActivity extends BaseActivity implements android.location
 
 		};
 
-		new AlertDialog.Builder(this).setTitle("¿ÀÇÂ¼Ò½º ¶óÀÌ¼¾½º").setMessage(getString(R.string.license)).setNegativeButton("È®ÀÎ", ok).show();
+		new AlertDialog.Builder(this).setTitle("ï¿½ï¿½ï¿½Â¼Ò½ï¿½ ï¿½ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½").setMessage(getString(R.string.license)).setNegativeButton("È®ï¿½ï¿½", ok).show();
 	}
 
 	private void showInit() {
@@ -1278,8 +1308,8 @@ public class SearchMainActivity extends BaseActivity implements android.location
 
 		};
 
-		new AlertDialog.Builder(this).setTitle("µ¥ÀÌÅÍ ÃÊ±âÈ­").setMessage("³ë¼±µ¥ÀÌÅÍ¸¦ ÃÊ±âÈ­ ÇÕ´Ï´Ù. ¾÷µ¥ÀÌÆ®°¡ ¾ÈµÇ´Â °æ¿ì¿¡¸¸ »ç¿ëÇÏ¼¼¿ä. °è¼ÓÁøÇà ÇÏ½Ã°Ú½À´Ï±î?").setPositiveButton("È®ÀÎ", ok)
-				.setNegativeButton("Ãë¼Ò", cancel).show();
+		new AlertDialog.Builder(this).setTitle("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­").setMessage("ï¿½ë¼±ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ê±ï¿½È­ ï¿½Õ´Ï´ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ÈµÇ´ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½Ã°Ú½ï¿½ï¿½Ï±ï¿½?").setPositiveButton("È®ï¿½ï¿½", ok)
+				.setNegativeButton("ï¿½ï¿½ï¿½", cancel).show();
 
 	}
 
@@ -1297,7 +1327,7 @@ public class SearchMainActivity extends BaseActivity implements android.location
 			} catch (InterruptedException e) {
 			}
 
-			Log.i("BusanBus", "DB¸¦ »èÁ¦ÇÕ´Ï´Ù.");
+			Log.i("BusanBus", "DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.");
 			return true;
 		}
 
@@ -1314,7 +1344,7 @@ public class SearchMainActivity extends BaseActivity implements android.location
 				startActivity(intent);
 
 			} else {
-				Toast.makeText(getApplicationContext(), "¾Ë ¼ö ¾ø´Â ¹®Á¦·Î ÃÊ±âÈ­°¡ ºÒ°¡´É ÇÕ´Ï´Ù.", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½ ï¿½Õ´Ï´ï¿½.", Toast.LENGTH_SHORT).show();
 			}
 		}
 
