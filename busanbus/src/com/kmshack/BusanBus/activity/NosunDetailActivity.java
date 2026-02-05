@@ -83,6 +83,7 @@ public class NosunDetailActivity extends BaseActivity {
 	private String mNosun;
 	private String mRealTimeNoSun;
 	private String mParamStopId;
+	private int mParamOrd = -1;
 	private String mLastStopName;
 	private WebView mWebview;
 	private ProgressBar mProgress;
@@ -238,9 +239,13 @@ public class NosunDetailActivity extends BaseActivity {
 			mParamStopId = "";
 		}
 
+		if (intent.hasExtra("Ord")) {
+			mParamOrd = intent.getIntExtra("Ord", -1);
+		}
+
 		tracker.trackPageView("/NosunDetail");
 
-		setTitle(mNosun + "¹ø ³ë¼±");
+		setTitle(mNosun + "ï¿½ï¿½ ï¿½ë¼±");
 
 		mImageInfo = (ImageView) findViewById(R.id.nosun_tap_favorite_image);
 		mImageLocation = (ImageView) findViewById(R.id.nosun_tap_nosun_image);
@@ -326,10 +331,10 @@ public class NosunDetailActivity extends BaseActivity {
 			public void onPost(String result) {
 				dismissDialog();
 
-				if (result.indexOf("°á°ú¾øÀ½") > 0) {
-					mTextNosunDetail.setText("¹ö½ºÁ¤º¸ ¾øÀ½.");
-				} else if (result.indexOf("¹ö½º¹øÈ£") > 0) {
-					String tmp1 = result.substring(result.indexOf("¹ö½º¹øÈ£") - 4, result.indexOf("¸·Â÷½Ã°£") + 10);
+				if (result.indexOf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½") > 0) {
+					mTextNosunDetail.setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.");
+				} else if (result.indexOf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£") > 0) {
+					String tmp1 = result.substring(result.indexOf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£") - 4, result.indexOf("ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½") + 10);
 					String tmp2 = tmp1.replace("<br/>", "").replace("<br />", "");
 					mTextNosunDetail.setText(tmp2);
 				}
@@ -354,16 +359,62 @@ public class NosunDetailActivity extends BaseActivity {
 		String up = intent.getStringExtra("Up");
 
 		if (TextUtils.isEmpty(down)) {
-			down = "»óÇà";
-			up = "ÇÏÇà";
+			down = "ï¿½ï¿½ï¿½ï¿½";
+			up = "ï¿½ï¿½ï¿½ï¿½";
 		} else {
-			down = down + "Çà";
-			up = up + "Çà";
+			down = down + "ï¿½ï¿½";
+			up = up + "ï¿½ï¿½";
 		}
 
 		mTextUp.setText(down);
 		mTextDown.setText(up);
 
+		if (mParamOrd >= 0 && !TextUtils.isEmpty(mParamStopId)) {
+			autoSelectTabAndScroll();
+		}
+
+	}
+
+	private void autoSelectTabAndScroll() {
+		Cursor cursor = mBusDb.selectBusline(mNosun);
+		int totalCount = cursor.getCount();
+		cursor.close();
+
+		int half = totalCount / 2;
+		if (mParamOrd <= half) {
+			setTabChange(TAB_UP);
+			doNosunUp();
+			scrollToOrd(mUpListView, mUpAdapter);
+		} else {
+			setTabChange(TAB_DOWN);
+			doNosunDown();
+			scrollToOrd(mDownListView, mDownAdapter);
+		}
+	}
+
+	private void scrollToOrd(final ListView listView, final SimpleCursorAdapter adapter) {
+		if (adapter == null) return;
+		final Cursor cursor = adapter.getCursor();
+		if (cursor == null) return;
+
+		int targetPosition = -1;
+		for (int i = 0; i < cursor.getCount(); i++) {
+			cursor.moveToPosition(i);
+			int ord = cursor.getInt(cursor.getColumnIndexOrThrow("ORD"));
+			if (ord == mParamOrd) {
+				targetPosition = i;
+				break;
+			}
+		}
+
+		if (targetPosition >= 0) {
+			final int pos = targetPosition;
+			listView.post(new Runnable() {
+				public void run() {
+					listView.setSelection(pos);
+				}
+			});
+		}
 	}
 
 	private void doNosunUp() {
@@ -488,7 +539,14 @@ public class NosunDetailActivity extends BaseActivity {
 				beforeLatlng = currentLatlng;
 
 				if (isGoId) {
-					if (stopid.equals(mParamStopId)) {
+					int ord = mCursor.getInt(2);
+					boolean isMatch;
+					if (mParamOrd >= 0) {
+						isMatch = stopid.equals(mParamStopId) && ord == mParamOrd;
+					} else {
+						isMatch = stopid.equals(mParamStopId);
+					}
+					if (isMatch) {
 						mGoogleMap.addMarker(marker).showInfoWindow();
 						centerLatlng = currentLatlng;
 					} else {
